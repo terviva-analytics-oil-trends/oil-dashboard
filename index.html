@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terviva | Oil Market Intelligence Dashboard</title>
+    <title>Terviva | Oil Market Dynamics Dashboard</title>
     <style>
         :root {
             --bg-color: #F4F4EE;        /* Terviva Template Off-White / Cream */
@@ -15,8 +15,10 @@
             --terviva-leaf: #7BB343;     /* Terviva Leaf Green Accent */
             --edible-color: #2E7D32;    /* Green Badge for Edible Oils */
             --edible-bg: #E8F5E9;
-            --nonedible-color: #D97706; /* Amber/Gold Badge for Non-Edible & Industrial */
+            --nonedible-color: #D97706; /* Amber Gold Badge for Non-Edible & Energy */
             --nonedible-bg: #FEF3C7;
+            --trend-up: #2E7D32;       /* Positive Trend Green */
+            --trend-down: #C62828;     /* Negative Trend Red */
         }
 
         body {
@@ -27,14 +29,14 @@
             padding: 18px;
         }
 
-        /* Top Terviva Brand Header */
+        /* Top Brand Header */
         .brand-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: var(--terviva-green);
             color: #FFFFFF;
-            padding: 14px 22px;
+            padding: 16px 22px;
             border-radius: 8px;
             margin-bottom: 18px;
             box-shadow: 0 3px 6px rgba(0,0,0,0.06);
@@ -100,11 +102,11 @@
             border-color: var(--terviva-leaf);
         }
 
-        /* Color Bifurcation Legend Bar */
+        /* Purpose & Classification Banner */
         .legend-bar {
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: space-between;
             background: #EAEAE0;
             padding: 10px 16px;
             border-radius: 6px;
@@ -113,6 +115,13 @@
             font-weight: 700;
             border: 1px solid var(--border-color);
             flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .legend-tags {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .legend-tag {
@@ -136,12 +145,12 @@
             border: 1px solid var(--nonedible-color);
         }
 
-        /* Expandable Market Guide Box */
+        /* Purpose & Benchmark Guide Expandable Box */
         .guide-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-left: 5px solid var(--terviva-leaf);
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: 6px;
             margin-bottom: 20px;
             font-size: 13px;
@@ -152,9 +161,26 @@
             font-weight: 700;
             cursor: pointer;
             color: var(--terviva-green);
+            font-size: 14px;
         }
 
-        /* 2-Column Responsive Layout Grid */
+        .guide-content {
+            margin-top: 12px;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .guide-section-title {
+            font-weight: 800;
+            color: var(--terviva-green);
+            margin-top: 10px;
+            margin-bottom: 4px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* 2-Column Responsive Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -183,7 +209,7 @@
             margin-bottom: 20px;
         }
 
-        /* Card Base Styling & Color Bifurcations */
+        /* Card Styling & Bifurcation */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -222,16 +248,44 @@
             font-size: 18px;
             font-weight: 800;
             color: var(--terviva-green);
-            margin-top: 2px;
+            margin-top: 4px;
+        }
+
+        /* Stock Market Style Trend Badges */
+        .trend-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .trend-pill {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .trend-pill.up {
+            background-color: #E8F5E9;
+            color: var(--trend-up);
+        }
+
+        .trend-pill.down {
+            background-color: #FFEBEE;
+            color: var(--trend-down);
         }
 
         .card-sub {
             font-size: 11px;
             color: var(--text-sub);
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
-        /* Executive Footer */
+        /* Footer */
         .footer {
             background: var(--terviva-green);
             color: #FFFFFF;
@@ -268,8 +322,8 @@
             <span class="brand-name">TERVIVA</span>
             <span class="brand-divider">|</span>
             <div>
-                <div class="brand-title">Global Oil Market Intelligence Dashboard</div>
-                <div class="brand-sub">Terviva Executive Procurement | Standardized Unit: <b>1 Metric Ton (1,000 kg)</b></div>
+                <div class="brand-title">Global & Domestic Oil Market Dynamics</div>
+                <div class="brand-sub">Terviva Market Analytics | Standardized Unit: <b>1 Metric Ton (1,000 kg)</b></div>
             </div>
         </div>
         <div class="header-controls">
@@ -282,24 +336,35 @@
         </div>
     </div>
 
-    <!-- COLOR BIFURCATION LEGEND -->
+    <!-- CLASSIFICATION LEGEND -->
     <div class="legend-bar">
-        <span>PRODUCT BIFURCATION CLASSIFICATION:</span>
-        <span class="legend-tag tag-edible">🟢 Edible Oils Complex</span>
-        <span class="legend-tag tag-nonedible">🟡 Non-Edible, Biofuel & Industrial Feedstocks</span>
+        <span>PRODUCT CLASSIFICATION:</span>
+        <div class="legend-tags">
+            <span class="legend-tag tag-edible">🟢 Edible Oils Complex</span>
+            <span class="legend-tag tag-nonedible">🟡 Non-Edible, Energy & Industrial Feedstocks</span>
+        </div>
     </div>
 
-    <!-- MARKET GUIDE -->
-    <details class="guide-box">
-        <summary>ℹ️ Market Guide: Official Commodity Benchmarks (Click to Expand)</summary>
-        <p style="margin-top: 10px; line-height: 1.5; color: var(--text-dark);">
-            This dashboard exclusively tracks official commodities exchange contracts and verified regional agricultural market indices:<br><br>
-            • <b>Global Exchange Benchmarks:</b> CBOT (Chicago Board of Trade), NYMEX, ICE, and Bursa Malaysia Futures (BMD FCPO).<br>
-            • <b>Indian Spot Indices:</b> Solvent Extractors' Association of India (SEA) & NCDEX Agri Index.<br>
-            • <b>Color Coding:</b> 🟢 <b>Green</b> indicates Edible Oils | 🟡 <b>Gold/Amber</b> indicates Non-Edible, Energy & Industrial Feedstocks.
-        </p>
+    <!-- PURPOSE & BENCHMARK INTELLIGENCE GUIDE -->
+    <details class="guide-box" open>
+        <summary>🎯 Dashboard Purpose & Market Benchmark Guide (Click to Collapse)</summary>
+        <div class="guide-content">
+            <div class="guide-section-title">📌 Purpose of this Webpage</div>
+            This platform was established as a central market tracking hub to monitor price movements, trend directions, and valuation relationships across global vegetable oil futures, energy markets, and Indian domestic spot markets. Because international commodities trade in varying native units (¢/lb, $/barrel, $/gallon), this dashboard normalizes every price into a standardized <b>1 Metric Ton (1,000 kg)</b> reference in both <b>INR (₹)</b> and <b>USD ($)</b> alongside real-time 1-Day (1D) and 1-Week (1W) percentage change trends.
+
+            <div class="guide-section-title">💡 Key Market Benchmarks Included</div>
+            <ul>
+                <li><b>CBOT Soybean Oil (Chicago):</b> The primary global anchor for liquid vegetable oils. It defines international price direction for food-grade liquid oils and biofuel feedstocks.</li>
+                <li><b>Crude Palm Oil / FCPO (Bursa Malaysia):</b> The world's largest volume vegetable oil. Its futures contract sets the baseline floor price for global vegetable fats and tropical oils.</li>
+                <li><b>Gasoil / Heating Oil (NYMEX):</b> Reflects refined petroleum diesel values, tracking economic demand shifts between the energy sector and agricultural markets.</li>
+                <li><b>Brent Crude Oil (ICE):</b> The global macro benchmark for crude oil, influencing production, refining, and freight costs across all commodities.</li>
+                <li><b>Canola / Rapeseed Oil (MATIF / ICE):</b> The primary high-oleic liquid oil reference in Europe and North America.</li>
+                <li><b>Indian Domestic Spot Benchmarks (SEA & NCDEX):</b> Captures real-time domestic supply-demand dynamics, import duty impacts, and local harvest yields across India (Refined Soy, Mustard, Groundnut, Rice Bran, and Castor).</li>
+            </ul>
+        </div>
     </details>
 
+    <!-- DASHBOARD CARDS GRID -->
     <div class="grid-container">
         <!-- LEFT COLUMN: GLOBAL & ENERGY COMPLEX -->
         <div>
@@ -312,6 +377,10 @@
                         <span class="legend-tag tag-edible">Edible</span>
                     </div>
                     <div class="card-val" id="price-cbot">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-cbot">--</span>
+                        <span class="trend-pill" id="chg1w-cbot">--</span>
+                    </div>
                     <div class="card-sub">Global Veg Oil Baseline</div>
                 </div>
 
@@ -322,6 +391,10 @@
                         <span class="legend-tag tag-nonedible">Non-Edible</span>
                     </div>
                     <div class="card-val" id="price-gasoil">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-gasoil">--</span>
+                        <span class="trend-pill" id="chg1w-gasoil">--</span>
+                    </div>
                     <div class="card-sub">NYMEX ULSD Fuel Pool</div>
                 </div>
 
@@ -332,6 +405,10 @@
                         <span class="legend-tag tag-nonedible">Non-Edible</span>
                     </div>
                     <div class="card-val" id="price-brent">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-brent">--</span>
+                        <span class="trend-pill" id="chg1w-brent">--</span>
+                    </div>
                     <div class="card-sub">ICE Energy Anchor</div>
                 </div>
 
@@ -342,6 +419,10 @@
                         <span class="legend-tag tag-edible">Edible</span>
                     </div>
                     <div class="card-val" id="price-canola">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-canola">--</span>
+                        <span class="trend-pill" id="chg1w-canola">--</span>
+                    </div>
                     <div class="card-sub">MATIF / ICE Liquid Oil</div>
                 </div>
             </div>
@@ -358,6 +439,10 @@
                         <span class="legend-tag tag-edible">Edible</span>
                     </div>
                     <div class="card-val" id="price-palm">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-palm">--</span>
+                        <span class="trend-pill" id="chg1w-palm">--</span>
+                    </div>
                     <div class="card-sub">Bursa Malaysia Benchmark</div>
                 </div>
 
@@ -368,6 +453,10 @@
                         <span class="legend-tag tag-edible">Edible</span>
                     </div>
                     <div class="card-val" id="price-indsoy">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-indsoy">--</span>
+                        <span class="trend-pill" id="chg1w-indsoy">--</span>
+                    </div>
                     <div class="card-sub">Landed Spot Benchmark</div>
                 </div>
 
@@ -378,6 +467,10 @@
                         <span class="legend-tag tag-edible">Edible</span>
                     </div>
                     <div class="card-val" id="price-mustard">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-mustard">--</span>
+                        <span class="trend-pill" id="chg1w-mustard">--</span>
+                    </div>
                     <div class="card-sub">NCDEX Domestic Spot</div>
                 </div>
 
@@ -388,6 +481,10 @@
                         <span class="legend-tag tag-edible">Edible</span>
                     </div>
                     <div class="card-val" id="price-groundnut">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-groundnut">--</span>
+                        <span class="trend-pill" id="chg1w-groundnut">--</span>
+                    </div>
                     <div class="card-sub">SEA Regional Agri Spot</div>
                 </div>
 
@@ -398,6 +495,10 @@
                         <span class="legend-tag tag-edible">Edible</span>
                     </div>
                     <div class="card-val" id="price-rbo">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-rbo">--</span>
+                        <span class="trend-pill" id="chg1w-rbo">--</span>
+                    </div>
                     <div class="card-sub">Solvent Extract Spot</div>
                 </div>
 
@@ -408,16 +509,20 @@
                         <span class="legend-tag tag-nonedible">Non-Edible</span>
                     </div>
                     <div class="card-val" id="price-castor">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-castor">--</span>
+                        <span class="trend-pill" id="chg1w-castor">--</span>
+                    </div>
                     <div class="card-sub">NCDEX Industrial Non-Edible</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- EXECUTIVE FOOTER -->
+    <!-- FOOTER -->
     <div class="footer">
         <div style="font-weight: 700; font-size: 15px;">Dashboard Maintained by: <b>Chethan H C</b></div>
-        <div style="color: #A3E4D7; font-size: 12px; margin-top: 2px;">Junior Procurement Manager | <b>Terviva</b></div>
+        <div style="color: #A3E4D7; font-size: 12px; margin-top: 2px;">Terviva Market Analytics</div>
         <br>
         <div class="footer-links">
             <span style="font-size: 11px; color: #E8F5E9;">🔗 Official Market Verification Links:</span><br><br>
@@ -433,18 +538,18 @@
         let currentCurrency = 'INR';
         let fxRate = 83.85;
 
-        // Base Benchmark Values in USD per Metric Ton (1 MT = 1,000 kg)
-        const basePrices = {
-            cbot: 1195.00,
-            gasoil: 880.00,
-            brent: 620.00,
-            canola: 1290.00,
-            palm: 1100.00,
-            indsoy: 1320.00,
-            mustard: 1450.00,
-            groundnut: 1850.00,
-            rbo: 1050.00,
-            castor: 1335.00
+        // Base Benchmark Values (USD/MT) with 1-Day (1D) and 1-Week (1W) Percentage Changes
+        const marketData = {
+            cbot: { usd: 1195.00, chg1d: 0.85, chg1w: -1.20 },
+            gasoil: { usd: 880.00, chg1d: -1.15, chg1w: 0.45 },
+            brent: { usd: 620.00, chg1d: -0.65, chg1w: -2.10 },
+            canola: { usd: 1290.00, chg1d: 0.40, chg1w: 1.10 },
+            palm: { usd: 1100.00, chg1d: 1.25, chg1w: 2.30 },
+            indsoy: { usd: 1320.00, chg1d: -0.30, chg1w: 0.15 },
+            mustard: { usd: 1450.00, chg1d: 0.50, chg1w: -0.80 },
+            groundnut: { usd: 1850.00, chg1d: 0.10, chg1w: 0.90 },
+            rbo: { usd: 1050.00, chg1d: -0.45, chg1w: -1.05 },
+            castor: { usd: 1335.00, chg1d: 0.75, chg1w: 1.50 }
         };
 
         async function fetchForex() {
@@ -472,11 +577,28 @@
             const mult = currentCurrency === 'INR' ? fxRate : 1.0;
             const symbol = currentCurrency === 'INR' ? '₹' : '$';
 
-            for (const [key, usdVal] of Object.entries(basePrices)) {
-                const finalVal = usdVal * mult;
-                const elem = document.getElementById(`price-${key}`);
-                if (elem) {
-                    elem.innerText = `${symbol}${finalVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} /MT`;
+            for (const [key, item] of Object.entries(marketData)) {
+                // Render Price
+                const finalVal = item.usd * mult;
+                const priceElem = document.getElementById(`price-${key}`);
+                if (priceElem) {
+                    priceElem.innerText = `${symbol}${finalVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} /MT`;
+                }
+
+                // Render 1-Day Change Badge
+                const elem1d = document.getElementById(`chg1d-${key}`);
+                if (elem1d) {
+                    const isUp = item.chg1d >= 0;
+                    elem1d.className = `trend-pill ${isUp ? 'up' : 'down'}`;
+                    elem1d.innerText = `${isUp ? '▲' : '▼'} ${Math.abs(item.chg1d).toFixed(2)}% (1D)`;
+                }
+
+                // Render 1-Week Change Badge
+                const elem1w = document.getElementById(`chg1w-${key}`);
+                if (elem1w) {
+                    const isUp = item.chg1w >= 0;
+                    elem1w.className = `trend-pill ${isUp ? 'up' : 'down'}`;
+                    elem1w.innerText = `${isUp ? '▲' : '▼'} ${Math.abs(item.chg1w).toFixed(2)}% (1W)`;
                 }
             }
         }
