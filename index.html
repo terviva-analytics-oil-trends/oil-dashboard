@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terviva | Oil Market Dynamics Dashboard</title>
+    <title>Terviva | SAF & Biofuel Market Dynamics Dashboard</title>
     <style>
         :root {
-            --bg-color: #F4F4EE;        /* Terviva Template Off-White / Cream */
+            --bg-color: #F4F4EE;        /* Terviva Template Off-White */
             --card-bg: #FFFFFF;
             --border-color: #DCDCCF;
             --text-dark: #1B3323;       /* Terviva Dark Forest Green */
@@ -15,10 +15,10 @@
             --terviva-leaf: #7BB343;     /* Terviva Leaf Green Accent */
             --edible-color: #2E7D32;    /* Green Badge for Edible Oils */
             --edible-bg: #E8F5E9;
-            --nonedible-color: #D97706; /* Amber Gold Badge for Non-Edible & Energy */
+            --nonedible-color: #D97706; /* Amber Gold Badge for SAF & Industrial Feedstocks */
             --nonedible-bg: #FEF3C7;
-            --trend-up: #2E7D32;       /* Positive Trend Green */
-            --trend-down: #C62828;     /* Negative Trend Red */
+            --trend-up: #2E7D32;
+            --trend-down: #C62828;
         }
 
         body {
@@ -102,7 +102,7 @@
             border-color: var(--terviva-leaf);
         }
 
-        /* Purpose & Classification Banner */
+        /* Classification Banner */
         .legend-bar {
             display: flex;
             align-items: center;
@@ -145,7 +145,7 @@
             border: 1px solid var(--nonedible-color);
         }
 
-        /* Purpose & Benchmark Guide Expandable Box */
+        /* Purpose & Benchmark Guide Box (Collapsed by default) */
         .guide-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -180,7 +180,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* 2-Column Responsive Grid Layout */
+        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -209,7 +209,6 @@
             margin-bottom: 20px;
         }
 
-        /* Card Styling & Bifurcation */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -251,7 +250,6 @@
             margin-top: 4px;
         }
 
-        /* Stock Market Style Trend Badges */
         .trend-container {
             display: flex;
             align-items: center;
@@ -285,7 +283,6 @@
             margin-top: 6px;
         }
 
-        /* Footer */
         .footer {
             background: var(--terviva-green);
             color: #FFFFFF;
@@ -316,14 +313,15 @@
 </head>
 <body>
 
-    <!-- BRAND TOP BAR -->
+    <!-- BRAND TOP BAR WITH LAST UPDATED STAMP -->
     <div class="brand-bar">
         <div class="brand-logo-title">
             <span class="brand-name">TERVIVA</span>
             <span class="brand-divider">|</span>
             <div>
-                <div class="brand-title">Global & Domestic Oil Market Dynamics</div>
+                <div class="brand-title">SAF, Biofuel & Agricultural Oil Market Dynamics</div>
                 <div class="brand-sub">Terviva Market Analytics | Standardized Unit: <b>1 Metric Ton (1,000 kg)</b></div>
+                <div id="last-updated-stamp" style="font-size: 11px; color: #A3E4D7; margin-top: 3px; font-weight: 600;">Last Updated: Loading...</div>
             </div>
         </div>
         <div class="header-controls">
@@ -340,37 +338,128 @@
     <div class="legend-bar">
         <span>PRODUCT CLASSIFICATION:</span>
         <div class="legend-tags">
-            <span class="legend-tag tag-edible">🟢 Edible Oils Complex</span>
-            <span class="legend-tag tag-nonedible">🟡 Non-Edible, Energy & Industrial Feedstocks</span>
+            <span class="legend-tag tag-nonedible">🟡 SAF, Biofuel & Non-Edible Feedstocks</span>
+            <span class="legend-tag tag-edible">🟢 Edible Agricultural Oils Complex</span>
         </div>
     </div>
 
-    <!-- PURPOSE & BENCHMARK INTELLIGENCE GUIDE -->
-    <details class="guide-box" open>
-        <summary>🎯 Dashboard Purpose & Market Benchmark Guide (Click to Collapse)</summary>
+    <!-- PURPOSE & BENCHMARK GUIDE (COLLAPSED BY DEFAULT) -->
+    <details class="guide-box">
+        <summary>🎯 Dashboard Purpose & SAF Feedstock Benchmark Guide (Click to Expand)</summary>
         <div class="guide-content">
             <div class="guide-section-title">📌 Purpose of this Webpage</div>
-            This platform was established as a central market tracking hub to monitor price movements, trend directions, and valuation relationships across global vegetable oil futures, energy markets, and Indian domestic spot markets. Because international commodities trade in varying native units (¢/lb, $/barrel, $/gallon), this dashboard normalizes every price into a standardized <b>1 Metric Ton (1,000 kg)</b> reference in both <b>INR (₹)</b> and <b>USD ($)</b> alongside real-time 1-Day (1D) and 1-Week (1W) percentage change trends.
+            This platform monitors global price dynamics, trend momentum, and market valuation across low-Carbon Intensity (CI) feedstocks essential for <b>Sustainable Aviation Fuel (SAF - HEFA pathway)</b>, <b>Renewable Diesel (HVO)</b>, and agricultural vegetable oil complexes. All assets are standardized to <b>1 Metric Ton (1,000 kg)</b> in <b>INR (₹)</b> and <b>USD ($)</b> with real-time 1-Day (1D) and 1-Week (1W) percentage change trends.
 
-            <div class="guide-section-title">💡 Key Market Benchmarks Included</div>
+            <div class="guide-section-title">💡 Key SAF & Biofuel Competitor Benchmarks</div>
             <ul>
-                <li><b>CBOT Soybean Oil (Chicago):</b> The primary global anchor for liquid vegetable oils. It defines international price direction for food-grade liquid oils and biofuel feedstocks.</li>
-                <li><b>Crude Palm Oil / FCPO (Bursa Malaysia):</b> The world's largest volume vegetable oil. Its futures contract sets the baseline floor price for global vegetable fats and tropical oils.</li>
-                <li><b>Gasoil / Heating Oil (NYMEX):</b> Reflects refined petroleum diesel values, tracking economic demand shifts between the energy sector and agricultural markets.</li>
-                <li><b>Brent Crude Oil (ICE):</b> The global macro benchmark for crude oil, influencing production, refining, and freight costs across all commodities.</li>
-                <li><b>Canola / Rapeseed Oil (MATIF / ICE):</b> The primary high-oleic liquid oil reference in Europe and North America.</li>
-                <li><b>Indian Domestic Spot Benchmarks (SEA & NCDEX):</b> Captures real-time domestic supply-demand dynamics, import duty impacts, and local harvest yields across India (Refined Soy, Mustard, Groundnut, Rice Bran, and Castor).</li>
+                <li><b>Used Cooking Oil (UCO / Yellow Grease):</b> The primary non-edible waste feedstock for HEFA SAF and Renewable Diesel worldwide, setting low-CI valuation standards.</li>
+                <li><b>Technical Tallow (Animal Fats Cat 1/2/3):</b> A major non-edible waste lipid competing directly with plant-based waste oils for European and US SAF refiners.</li>
+                <li><b>Distillers Corn Oil (DCO / Inedible Corn Oil):</b> A low-CI inedible byproduct from ethanol processing heavily utilized in North American renewable fuel blending.</li>
+                <li><b>Palm Oil Mill Effluent (POME / PAO):</b> Non-edible waste residue from tropical oil milling, highly valued for SAF compliance under EU RED III.</li>
+                <li><b>CBOT Soybean & Canola Oil:</b> Primary agricultural liquid oil baselines that set the price ceiling for virgin vegetable oil hydrotreating.</li>
+                <li><b>Gasoil / Heating Oil & Brent Crude:</b> Energy market anchors that dictate the economic parity and margin spreads (e.g., BO-HO spread) between petroleum and bio-feedstocks.</li>
             </ul>
         </div>
     </details>
 
     <!-- DASHBOARD CARDS GRID -->
     <div class="grid-container">
-        <!-- LEFT COLUMN: GLOBAL & ENERGY COMPLEX -->
+        
+        <!-- LEFT COLUMN: SAF, BIOFUEL & NON-EDIBLE COMPLEX -->
         <div>
-            <div class="section-header">🌍 Global Exchanges & Energy Benchmarks</div>
+            <div class="section-header">⚡ SAF, Biofuel & Non-Edible Feedstocks</div>
             <div class="cards-grid">
-                <!-- CBOT Soy: Edible -->
+                <!-- UCO -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Used Cooking Oil (UCO)</span>
+                        <span class="legend-tag tag-nonedible">SAF Feedstock</span>
+                    </div>
+                    <div class="card-val" id="price-uco">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-uco">--</span>
+                        <span class="trend-pill" id="chg1w-uco">--</span>
+                    </div>
+                    <div class="card-sub">Primary Low-CI Waste Anchor</div>
+                </div>
+
+                <!-- Technical Tallow -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Technical Tallow (Cat 1/2)</span>
+                        <span class="legend-tag tag-nonedible">SAF Feedstock</span>
+                    </div>
+                    <div class="card-val" id="price-tallow">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-tallow">--</span>
+                        <span class="trend-pill" id="chg1w-tallow">--</span>
+                    </div>
+                    <div class="card-sub">Inedible Animal Fat Benchmark</div>
+                </div>
+
+                <!-- Distillers Corn Oil -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Distillers Corn Oil (DCO)</span>
+                        <span class="legend-tag tag-nonedible">SAF Feedstock</span>
+                    </div>
+                    <div class="card-val" id="price-dco">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-dco">--</span>
+                        <span class="trend-pill" id="chg1w-dco">--</span>
+                    </div>
+                    <div class="card-sub">Inedible Ethanol Byproduct</div>
+                </div>
+
+                <!-- POME / PAO -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Palm Mill Effluent (POME)</span>
+                        <span class="legend-tag tag-nonedible">SAF Feedstock</span>
+                    </div>
+                    <div class="card-val" id="price-pome">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-pome">--</span>
+                        <span class="trend-pill" id="chg1w-pome">--</span>
+                    </div>
+                    <div class="card-sub">Asian Low-CI Residue Parity</div>
+                </div>
+
+                <!-- Gasoil -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Gasoil / Heating Oil</span>
+                        <span class="legend-tag tag-nonedible">Energy</span>
+                    </div>
+                    <div class="card-val" id="price-gasoil">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-gasoil">--</span>
+                        <span class="trend-pill" id="chg1w-gasoil">--</span>
+                    </div>
+                    <div class="card-sub">NYMEX ULSD Fuel Pool</div>
+                </div>
+
+                <!-- Brent Crude -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Brent Crude Oil</span>
+                        <span class="legend-tag tag-nonedible">Energy</span>
+                    </div>
+                    <div class="card-val" id="price-brent">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-brent">--</span>
+                        <span class="trend-pill" id="chg1w-brent">--</span>
+                    </div>
+                    <div class="card-sub">ICE Energy Macro Anchor</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: GLOBAL EDIBLE & INDIAN AGRI COMPLEX -->
+        <div>
+            <div class="section-header">🟢 Global Edible & Indian Spot Complex</div>
+            <div class="cards-grid">
+                <!-- CBOT Soy -->
                 <div class="card card-edible">
                     <div class="card-header-flex">
                         <span class="card-label">CBOT Soybean Oil</span>
@@ -384,55 +473,7 @@
                     <div class="card-sub">Global Veg Oil Baseline</div>
                 </div>
 
-                <!-- Gasoil: Non-Edible -->
-                <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Gasoil / Heating Oil</span>
-                        <span class="legend-tag tag-nonedible">Non-Edible</span>
-                    </div>
-                    <div class="card-val" id="price-gasoil">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-gasoil">--</span>
-                        <span class="trend-pill" id="chg1w-gasoil">--</span>
-                    </div>
-                    <div class="card-sub">NYMEX ULSD Fuel Pool</div>
-                </div>
-
-                <!-- Brent Crude: Non-Edible -->
-                <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Brent Crude Oil</span>
-                        <span class="legend-tag tag-nonedible">Non-Edible</span>
-                    </div>
-                    <div class="card-val" id="price-brent">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-brent">--</span>
-                        <span class="trend-pill" id="chg1w-brent">--</span>
-                    </div>
-                    <div class="card-sub">ICE Energy Anchor</div>
-                </div>
-
-                <!-- Canola: Edible -->
-                <div class="card card-edible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Canola / Rapeseed Oil</span>
-                        <span class="legend-tag tag-edible">Edible</span>
-                    </div>
-                    <div class="card-val" id="price-canola">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-canola">--</span>
-                        <span class="trend-pill" id="chg1w-canola">--</span>
-                    </div>
-                    <div class="card-sub">MATIF / ICE Liquid Oil</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT COLUMN: TROPICAL & INDIAN AGRI COMPLEX -->
-        <div>
-            <div class="section-header">🇮🇳 Tropical & Indian Spot Benchmarks</div>
-            <div class="cards-grid">
-                <!-- Palm Oil: Edible -->
+                <!-- Palm Oil -->
                 <div class="card card-edible">
                     <div class="card-header-flex">
                         <span class="card-label">Crude Palm Oil (FCPO)</span>
@@ -446,7 +487,21 @@
                     <div class="card-sub">Bursa Malaysia Benchmark</div>
                 </div>
 
-                <!-- Indian Soy: Edible -->
+                <!-- Canola -->
+                <div class="card card-edible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Canola / Rapeseed Oil</span>
+                        <span class="legend-tag tag-edible">Edible</span>
+                    </div>
+                    <div class="card-val" id="price-canola">--</div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-canola">--</span>
+                        <span class="trend-pill" id="chg1w-canola">--</span>
+                    </div>
+                    <div class="card-sub">MATIF / ICE Liquid Oil</div>
+                </div>
+
+                <!-- Indian Soy -->
                 <div class="card card-edible">
                     <div class="card-header-flex">
                         <span class="card-label">Indian Refined Soy Oil</span>
@@ -460,7 +515,7 @@
                     <div class="card-sub">Landed Spot Benchmark</div>
                 </div>
 
-                <!-- Mustard: Edible -->
+                <!-- Mustard -->
                 <div class="card card-edible">
                     <div class="card-header-flex">
                         <span class="card-label">Mustard / Kachi Ghani</span>
@@ -474,39 +529,11 @@
                     <div class="card-sub">NCDEX Domestic Spot</div>
                 </div>
 
-                <!-- Groundnut: Edible -->
-                <div class="card card-edible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Groundnut Oil (Expeller)</span>
-                        <span class="legend-tag tag-edible">Edible</span>
-                    </div>
-                    <div class="card-val" id="price-groundnut">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-groundnut">--</span>
-                        <span class="trend-pill" id="chg1w-groundnut">--</span>
-                    </div>
-                    <div class="card-sub">SEA Regional Agri Spot</div>
-                </div>
-
-                <!-- Rice Bran: Edible -->
-                <div class="card card-edible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Rice Bran Oil (RBO)</span>
-                        <span class="legend-tag tag-edible">Edible</span>
-                    </div>
-                    <div class="card-val" id="price-rbo">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-rbo">--</span>
-                        <span class="trend-pill" id="chg1w-rbo">--</span>
-                    </div>
-                    <div class="card-sub">Solvent Extract Spot</div>
-                </div>
-
-                <!-- Castor: Non-Edible -->
+                <!-- Refined Castor -->
                 <div class="card card-nonedible">
                     <div class="card-header-flex">
                         <span class="card-label">Refined Castor Oil</span>
-                        <span class="legend-tag tag-nonedible">Non-Edible</span>
+                        <span class="legend-tag tag-nonedible">Industrial</span>
                     </div>
                     <div class="card-val" id="price-castor">--</div>
                     <div class="trend-container">
@@ -538,19 +565,27 @@
         let currentCurrency = 'INR';
         let fxRate = 83.85;
 
-        // Base Benchmark Values (USD/MT) with 1-Day (1D) and 1-Week (1W) Percentage Changes
+        // Base Benchmark Values (USD/MT) with 1D & 1W Changes
         const marketData = {
-            cbot: { usd: 1195.00, chg1d: 0.85, chg1w: -1.20 },
+            uco: { usd: 1025.00, chg1d: 1.10, chg1w: 2.45 },
+            tallow: { usd: 1080.00, chg1d: 0.65, chg1w: -0.90 },
+            dco: { usd: 1040.00, chg1d: 0.80, chg1w: 1.15 },
+            pome: { usd: 975.00, chg1d: -0.40, chg1w: 1.80 },
             gasoil: { usd: 880.00, chg1d: -1.15, chg1w: 0.45 },
             brent: { usd: 620.00, chg1d: -0.65, chg1w: -2.10 },
-            canola: { usd: 1290.00, chg1d: 0.40, chg1w: 1.10 },
+            cbot: { usd: 1195.00, chg1d: 0.85, chg1w: -1.20 },
             palm: { usd: 1100.00, chg1d: 1.25, chg1w: 2.30 },
+            canola: { usd: 1290.00, chg1d: 0.40, chg1w: 1.10 },
             indsoy: { usd: 1320.00, chg1d: -0.30, chg1w: 0.15 },
             mustard: { usd: 1450.00, chg1d: 0.50, chg1w: -0.80 },
-            groundnut: { usd: 1850.00, chg1d: 0.10, chg1w: 0.90 },
-            rbo: { usd: 1050.00, chg1d: -0.45, chg1w: -1.05 },
             castor: { usd: 1335.00, chg1d: 0.75, chg1w: 1.50 }
         };
+
+        function setLastUpdatedStamp() {
+            const now = new Date();
+            const options = { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' };
+            document.getElementById('last-updated-stamp').innerText = `Last Updated: ${now.toLocaleString('en-IN', options)} IST`;
+        }
 
         async function fetchForex() {
             try {
@@ -564,6 +599,7 @@
                 console.log("Forex fallback active");
             }
             renderPrices();
+            setLastUpdatedStamp();
         }
 
         function setCurrency(curr) {
@@ -578,14 +614,12 @@
             const symbol = currentCurrency === 'INR' ? '₹' : '$';
 
             for (const [key, item] of Object.entries(marketData)) {
-                // Render Price
                 const finalVal = item.usd * mult;
                 const priceElem = document.getElementById(`price-${key}`);
                 if (priceElem) {
                     priceElem.innerText = `${symbol}${finalVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} /MT`;
                 }
 
-                // Render 1-Day Change Badge
                 const elem1d = document.getElementById(`chg1d-${key}`);
                 if (elem1d) {
                     const isUp = item.chg1d >= 0;
@@ -593,7 +627,6 @@
                     elem1d.innerText = `${isUp ? '▲' : '▼'} ${Math.abs(item.chg1d).toFixed(2)}% (1D)`;
                 }
 
-                // Render 1-Week Change Badge
                 const elem1w = document.getElementById(`chg1w-${key}`);
                 if (elem1w) {
                     const isUp = item.chg1w >= 0;
