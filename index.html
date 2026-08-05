@@ -3,92 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oil Market Intelligence | Chethan H C</title>
+    <title>Terviva | Oil Market Intelligence Dashboard</title>
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --text-main: #f0f6fc;
-            --text-sub: #8b949e;
-            --accent-blue: #58a6ff;
-            --green: #2ea043;
+            --bg-color: #F4F4EE;        /* Terviva Template Off-White / Cream */
+            --card-bg: #FFFFFF;
+            --border-color: #DCDCCF;
+            --text-dark: #1B3323;       /* Terviva Dark Forest Green */
+            --text-sub: #5A6E60;
+            --terviva-green: #1B3323;
+            --terviva-leaf: #7BB343;     /* Terviva Leaf Green Accent */
+            --edible-color: #2E7D32;    /* Green Badge for Edible Oils */
+            --edible-bg: #E8F5E9;
+            --nonedible-color: #D97706; /* Amber/Gold Badge for Non-Edible & Industrial */
+            --nonedible-bg: #FEF3C7;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-dark);
             margin: 0;
-            padding: 15px;
+            padding: 18px;
         }
 
-        .header {
+        /* Top Terviva Brand Header */
+        .brand-bar {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-            margin-bottom: 15px;
+            background: var(--terviva-green);
+            color: #FFFFFF;
+            padding: 14px 22px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.06);
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .title-area h1 {
-            font-size: 20px;
-            margin: 0;
-            color: var(--text-main);
-        }
-
-        .title-area p {
-            font-size: 12px;
-            color: var(--text-sub);
-            margin: 3px 0 0 0;
-        }
-
-        .controls {
+        .brand-logo-title {
             display: flex;
             align-items: center;
-            gap: 15px;
-            background: var(--card-bg);
-            padding: 8px 14px;
+            gap: 12px;
+        }
+
+        .brand-name {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+
+        .brand-divider {
+            color: var(--terviva-leaf);
+            font-size: 20px;
+        }
+
+        .brand-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #E8F5E9;
+        }
+
+        .brand-sub {
+            font-size: 11px;
+            color: #A3E4D7;
+            margin-top: 2px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #254431;
+            padding: 6px 14px;
             border-radius: 6px;
-            border: 1px solid var(--border-color);
             font-size: 13px;
         }
 
         .btn-group button {
-            background: #21262d;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
+            background: #122217;
+            border: 1px solid #3A5F48;
+            color: #FFFFFF;
             padding: 5px 12px;
             cursor: pointer;
             border-radius: 4px;
             font-size: 12px;
+            font-weight: 700;
         }
 
         .btn-group button.active {
-            background: var(--accent-blue);
-            color: #fff;
-            border-color: var(--accent-blue);
+            background: var(--terviva-leaf);
+            color: #1B3323;
+            border-color: var(--terviva-leaf);
         }
 
+        /* Color Bifurcation Legend Bar */
+        .legend-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #EAEAE0;
+            padding: 10px 16px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .legend-tag {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 800;
+        }
+
+        .tag-edible {
+            background: var(--edible-bg);
+            color: var(--edible-color);
+            border: 1px solid var(--edible-color);
+        }
+
+        .tag-nonedible {
+            background: var(--nonedible-bg);
+            color: var(--nonedible-color);
+            border: 1px solid var(--nonedible-color);
+        }
+
+        /* Expandable Market Guide Box */
         .guide-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent-blue);
-            padding: 12px;
+            border-left: 5px solid var(--terviva-leaf);
+            padding: 12px 16px;
             border-radius: 6px;
             margin-bottom: 20px;
             font-size: 13px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
         }
 
         .guide-box summary {
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            color: var(--accent-blue);
+            color: var(--terviva-green);
         }
 
+        /* 2-Column Responsive Layout Grid */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -101,158 +167,246 @@
             }
         }
 
-        .section-title {
+        .section-header {
             font-size: 15px;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 6px;
             margin-bottom: 12px;
-            color: var(--text-main);
+            color: var(--terviva-green);
         }
 
         .cards-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 20px;
         }
 
+        /* Card Base Styling & Color Bifurcations */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .card.card-edible {
+            border-top: 4px solid var(--edible-color);
+        }
+
+        .card.card-nonedible {
+            border-top: 4px solid var(--nonedible-color);
+        }
+
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
         }
 
         .card-label {
-            font-size: 11px;
-            color: var(--text-sub);
-            margin-bottom: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            max-width: 70%;
         }
 
         .card-val {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--accent-blue);
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--terviva-green);
+            margin-top: 2px;
         }
 
         .card-sub {
             font-size: 11px;
-            color: var(--green);
+            color: var(--text-sub);
             margin-top: 4px;
         }
 
+        /* Executive Footer */
         .footer {
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 25px;
+            background: var(--terviva-green);
+            color: #FFFFFF;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 30px;
             text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.06);
         }
 
         .footer-links a {
-            color: var(--accent-blue);
+            color: #FFFFFF;
             text-decoration: none;
             font-size: 11px;
             margin: 0 4px;
             display: inline-block;
-            background: #21262d;
-            padding: 4px 8px;
+            background: #254431;
+            padding: 5px 10px;
             border-radius: 4px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #3A5F48;
+        }
+
+        .footer-links a:hover {
+            background: var(--terviva-leaf);
+            color: #1B3323;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="title-area">
-            <h1>🛢️ Oil Market Intelligence Dashboard</h1>
-            <p>Terviva Executive Procurement | Standardized Unit: <b>1 Metric Ton (1,000 kg)</b></p>
+    <!-- BRAND TOP BAR -->
+    <div class="brand-bar">
+        <div class="brand-logo-title">
+            <span class="brand-name">TERVIVA</span>
+            <span class="brand-divider">|</span>
+            <div>
+                <div class="brand-title">Global Oil Market Intelligence Dashboard</div>
+                <div class="brand-sub">Terviva Executive Procurement | Standardized Unit: <b>1 Metric Ton (1,000 kg)</b></div>
+            </div>
         </div>
-        <div class="controls">
+        <div class="header-controls">
             <span>Currency:</span>
             <div class="btn-group">
                 <button id="btn-inr" class="active" onclick="setCurrency('INR')">INR (₹)</button>
                 <button id="btn-usd" onclick="setCurrency('USD')">USD ($)</button>
             </div>
-            <span id="fx-rate-display" style="color: var(--text-sub);">USD/INR: ₹83.85</span>
+            <span id="fx-rate-display" style="color: #A3E4D7; font-weight: 600;">USD/INR: ₹83.85</span>
         </div>
     </div>
 
+    <!-- COLOR BIFURCATION LEGEND -->
+    <div class="legend-bar">
+        <span>PRODUCT BIFURCATION CLASSIFICATION:</span>
+        <span class="legend-tag tag-edible">🟢 Edible Oils Complex</span>
+        <span class="legend-tag tag-nonedible">🟡 Non-Edible, Biofuel & Industrial Feedstocks</span>
+    </div>
+
+    <!-- MARKET GUIDE -->
     <details class="guide-box">
         <summary>ℹ️ Market Guide: Official Commodity Benchmarks (Click to Expand)</summary>
-        <p style="margin-top: 10px; line-height: 1.5;">
+        <p style="margin-top: 10px; line-height: 1.5; color: var(--text-dark);">
             This dashboard exclusively tracks official commodities exchange contracts and verified regional agricultural market indices:<br><br>
             • <b>Global Exchange Benchmarks:</b> CBOT (Chicago Board of Trade), NYMEX, ICE, and Bursa Malaysia Futures (BMD FCPO).<br>
             • <b>Indian Spot Indices:</b> Solvent Extractors' Association of India (SEA) & NCDEX Agri Index.<br>
-            • <b>Unit Standardization:</b> All contract units (cents/lb, $/barrel, $/gallon) are converted into <b>1 Metric Ton (1 MT = 1,000 kg)</b>.
+            • <b>Color Coding:</b> 🟢 <b>Green</b> indicates Edible Oils | 🟡 <b>Gold/Amber</b> indicates Non-Edible, Energy & Industrial Feedstocks.
         </p>
     </details>
 
     <div class="grid-container">
-        <!-- LEFT COLUMN: ENERGY & BIOFUEL BENCHMARKS -->
+        <!-- LEFT COLUMN: GLOBAL & ENERGY COMPLEX -->
         <div>
-            <div class="section-title">⚡ Biofuel & Energy Market Benchmarks</div>
+            <div class="section-header">🌍 Global Exchanges & Energy Benchmarks</div>
             <div class="cards-grid">
-                <div class="card">
-                    <div class="card-label">CBOT Soybean Oil</div>
+                <!-- CBOT Soy: Edible -->
+                <div class="card card-edible">
+                    <div class="card-header-flex">
+                        <span class="card-label">CBOT Soybean Oil</span>
+                        <span class="legend-tag tag-edible">Edible</span>
+                    </div>
                     <div class="card-val" id="price-cbot">--</div>
-                    <div class="card-sub">Global Biofuel Baseline</div>
+                    <div class="card-sub">Global Veg Oil Baseline</div>
                 </div>
-                <div class="card">
-                    <div class="card-label">Gasoil / Heating Oil (ULSD)</div>
+
+                <!-- Gasoil: Non-Edible -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Gasoil / Heating Oil</span>
+                        <span class="legend-tag tag-nonedible">Non-Edible</span>
+                    </div>
                     <div class="card-val" id="price-gasoil">--</div>
-                    <div class="card-sub">NYMEX Fuel Pool Benchmark</div>
+                    <div class="card-sub">NYMEX ULSD Fuel Pool</div>
                 </div>
-                <div class="card">
-                    <div class="card-label">Brent Crude Oil</div>
+
+                <!-- Brent Crude: Non-Edible -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Brent Crude Oil</span>
+                        <span class="legend-tag tag-nonedible">Non-Edible</span>
+                    </div>
                     <div class="card-val" id="price-brent">--</div>
-                    <div class="card-sub">ICE Macro Energy Anchor</div>
+                    <div class="card-sub">ICE Energy Anchor</div>
                 </div>
-                <div class="card">
-                    <div class="card-label">Canola / Rapeseed Oil</div>
+
+                <!-- Canola: Edible -->
+                <div class="card card-edible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Canola / Rapeseed Oil</span>
+                        <span class="legend-tag tag-edible">Edible</span>
+                    </div>
                     <div class="card-val" id="price-canola">--</div>
                     <div class="card-sub">MATIF / ICE Liquid Oil</div>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: TROPICAL & INDIAN AGRI OILS -->
+        <!-- RIGHT COLUMN: TROPICAL & INDIAN AGRI COMPLEX -->
         <div>
-            <div class="section-title">🌍 Tropical & 🇮🇳 Indian Agri Spot Benchmarks</div>
+            <div class="section-header">🇮🇳 Tropical & Indian Spot Benchmarks</div>
             <div class="cards-grid">
-                <div class="card">
-                    <div class="card-label">Crude Palm Oil (FCPO)</div>
+                <!-- Palm Oil: Edible -->
+                <div class="card card-edible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Crude Palm Oil (FCPO)</span>
+                        <span class="legend-tag tag-edible">Edible</span>
+                    </div>
                     <div class="card-val" id="price-palm">--</div>
                     <div class="card-sub">Bursa Malaysia Benchmark</div>
                 </div>
-                <div class="card">
-                    <div class="card-label">Indian Refined Soy Oil</div>
+
+                <!-- Indian Soy: Edible -->
+                <div class="card card-edible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Indian Refined Soy Oil</span>
+                        <span class="legend-tag tag-edible">Edible</span>
+                    </div>
                     <div class="card-val" id="price-indsoy">--</div>
                     <div class="card-sub">Landed Spot Benchmark</div>
                 </div>
-                <div class="card">
-                    <div class="card-label">Mustard / Kachi Ghani Oil</div>
+
+                <!-- Mustard: Edible -->
+                <div class="card card-edible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Mustard / Kachi Ghani</span>
+                        <span class="legend-tag tag-edible">Edible</span>
+                    </div>
                     <div class="card-val" id="price-mustard">--</div>
                     <div class="card-sub">NCDEX Domestic Spot</div>
                 </div>
-                <div class="card">
-                    <div class="card-label">Groundnut Oil (Expeller)</div>
+
+                <!-- Groundnut: Edible -->
+                <div class="card card-edible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Groundnut Oil (Expeller)</span>
+                        <span class="legend-tag tag-edible">Edible</span>
+                    </div>
                     <div class="card-val" id="price-groundnut">--</div>
                     <div class="card-sub">SEA Regional Agri Spot</div>
                 </div>
-                <div class="card">
-                    <div class="card-label">Rice Bran Oil (RBO)</div>
+
+                <!-- Rice Bran: Edible -->
+                <div class="card card-edible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Rice Bran Oil (RBO)</span>
+                        <span class="legend-tag tag-edible">Edible</span>
+                    </div>
                     <div class="card-val" id="price-rbo">--</div>
                     <div class="card-sub">Solvent Extract Spot</div>
                 </div>
-                <div class="card">
-                    <div class="card-label">Refined Castor Oil</div>
+
+                <!-- Castor: Non-Edible -->
+                <div class="card card-nonedible">
+                    <div class="card-header-flex">
+                        <span class="card-label">Refined Castor Oil</span>
+                        <span class="legend-tag tag-nonedible">Non-Edible</span>
+                    </div>
                     <div class="card-val" id="price-castor">--</div>
                     <div class="card-sub">NCDEX Industrial Non-Edible</div>
                 </div>
@@ -260,12 +414,13 @@
         </div>
     </div>
 
+    <!-- EXECUTIVE FOOTER -->
     <div class="footer">
-        <div style="font-weight: 600; font-size: 14px;">Dashboard Maintained by: <b>Chethan H C</b></div>
-        <div style="color: var(--text-sub); font-size: 12px; margin-top: 2px;">Junior Procurement Manager | <b>Terviva</b></div>
+        <div style="font-weight: 700; font-size: 15px;">Dashboard Maintained by: <b>Chethan H C</b></div>
+        <div style="color: #A3E4D7; font-size: 12px; margin-top: 2px;">Junior Procurement Manager | <b>Terviva</b></div>
         <br>
         <div class="footer-links">
-            <span style="font-size: 11px; color: var(--text-sub);">🔗 Official Verification Links:</span><br><br>
+            <span style="font-size: 11px; color: #E8F5E9;">🔗 Official Market Verification Links:</span><br><br>
             <a href="https://www.tradingview.com/symbols/CBOT-ZL1!/" target="_blank">↗ CBOT Soy Oil</a>
             <a href="https://www.marketwatch.com/investing/future/crude%20oil%20-%20electronic" target="_blank">↗ WTI Crude</a>
             <a href="https://www.investing.com/commodities/heating-oil" target="_blank">↗ Gasoil</a>
