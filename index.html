@@ -188,10 +188,10 @@
     <details class="guide-box">
         <summary>ℹ️ Market Guide: How Are These Prices Derived? (Click to Expand)</summary>
         <p style="margin-top: 10px; line-height: 1.5;">
-            This dashboard tracks global commodities exchange benchmarks (CBOT, NYMEX, ICE) to determine fair market procurement pricing:<br><br>
+            This dashboard tracks global commodities exchange benchmarks (CBOT, NYMEX, ICE) alongside Indian domestic agricultural spot proxies:<br><br>
             • <b>Unit Standardization:</b> Conversions applied so all products display in <b>1 Metric Ton (1 MT = 1,000 kg)</b>.<br>
             • <b>Currency Normalization:</b> Raw USD market quotes dynamically scale to <b>Indian Rupees (₹)</b> using live forex rates.<br>
-            • <b>Crude Pongamia Oil Parity:</b> Modeled relative to low-Carbon Intensity (CI) biofuel feedstocks (Used Cooking Oil / CBOT Soy Oil) minus Free Fatty Acid (FFA) yield processing adjustments.
+            • <b>Crude Pongamia Oil Baseline:</b> Calibrated to physical spot market levels in India (<b>₹130/kg / ₹130,000 per MT</b>) to reflect local procurement conditions.
         </p>
     </details>
 
@@ -211,9 +211,9 @@
                     <div class="card-sub">Low-CI Non-Edible Feed</div>
                 </div>
                 <div class="card" style="border-color: var(--accent-blue);">
-                    <div class="card-label" style="color: var(--accent-blue); font-weight:600;">Crude Pongamia Oil (Est. FMV)</div>
+                    <div class="card-label" style="color: var(--accent-blue); font-weight:600;">Crude Pongamia Oil (Local Spot)</div>
                     <div class="card-val" id="price-pongamia">--</div>
-                    <div class="card-sub">Yield Adjusted Parity</div>
+                    <div class="card-sub">Local Physical Parity (₹130/kg)</div>
                 </div>
                 <div class="card">
                     <div class="card-label">Gasoil / Heating Oil (ULSD)</div>
@@ -234,7 +234,7 @@
                 </div>
                 <div class="card">
                     <div class="card-label">Indian Refined Soy Oil</div>
-                    <div class="card-val" id="price-ind-soy">--</div>
+                    <div class="card-val" id="price-indSoy">--</div>
                     <div class="card-sub">Land Duty-Paid Spot</div>
                 </div>
                 <div class="card">
@@ -279,18 +279,19 @@
         let currentCurrency = 'INR';
         let fxRate = 83.85;
 
-        // Base USD per Metric Ton
+        // Base Prices in USD per Metric Ton
+        // Pongamia set to $1,550.39/MT -> Converts directly to ₹130,000/MT (₹130/kg) at standard FX
         const basePrices = {
-            cbot: 1050.00,
-            uco: 945.00,
-            pongamia: 819.00,
-            gasoil: 780.00,
-            palm: 966.00,
-            indSoy: 1102.50,
-            mustard: 1281.00,
-            groundnut: 1627.50,
-            rbo: 924.00,
-            castor: 1176.00
+            cbot: 1195.00,
+            uco: 1075.00,
+            pongamia: 1550.39,
+            gasoil: 880.00,
+            palm: 1100.00,
+            indSoy: 1320.00,
+            mustard: 1450.00,
+            groundnut: 1850.00,
+            rbo: 1050.00,
+            castor: 1335.00
         };
 
         async function fetchForex() {
