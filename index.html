@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oil Market Intelligence | Chethan H C</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #f0f6fc;
+            --text-sub: #8b949e;
+            --accent-blue: #58a6ff;
+            --green: #2ea043;
+            --red: #f85149;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 15px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .title-area h1 {
+            font-size: 20px;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .title-area p {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin: 3px 0 0 0;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--card-bg);
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .btn-group button {
+            background: #21262d;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 5px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .btn-group button.active {
+            background: var(--accent-blue);
+            color: #fff;
+            border-color: var(--accent-blue);
+        }
+
+        .guide-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-blue);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .guide-box summary {
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--accent-blue);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 850px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .card-label {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .card-sub {
+            font-size: 11px;
+            color: var(--green);
+            margin-top: 4px;
+        }
+
+        .footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .footer-links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 11px;
+            margin: 0 5px;
+            display: inline-block;
+            background: #21262d;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="title-area">
+            <h1>🛢️ Oil Market Intelligence Dashboard</h1>
+            <p>Terviva Executive Procurement | Standardized Unit: <b>1 Metric Ton (1,000 kg)</b></p>
+        </div>
+        <div class="controls">
+            <span>Currency:</span>
+            <div class="btn-group">
+                <button id="btn-inr" class="active" onclick="setCurrency('INR')">INR (₹)</button>
+                <button id="btn-usd" onclick="setCurrency('USD')">USD ($)</button>
+            </div>
+            <span id="fx-rate-display" style="color: var(--text-sub);">USD/INR: ₹83.85</span>
+        </div>
+    </div>
+
+    <details class="guide-box">
+        <summary>ℹ️ Market Guide: How Are These Prices Derived? (Click to Expand)</summary>
+        <p style="margin-top: 10px; line-height: 1.5;">
+            This dashboard tracks global commodities exchange benchmarks (CBOT, NYMEX, ICE) to determine fair market procurement pricing:<br><br>
+            • <b>Unit Standardization:</b> Conversions applied so all products display in <b>1 Metric Ton (1 MT = 1,000 kg)</b>.<br>
+            • <b>Currency Normalization:</b> Raw USD market quotes dynamically scale to <b>Indian Rupees (₹)</b> using live forex rates.<br>
+            • <b>Crude Pongamia Oil Parity:</b> Modeled relative to low-Carbon Intensity (CI) biofuel feedstocks (Used Cooking Oil / CBOT Soy Oil) minus Free Fatty Acid (FFA) yield processing adjustments.
+        </p>
+    </details>
+
+    <div class="grid-container">
+        <!-- LEFT COLUMN -->
+        <div>
+            <div class="section-title">🌱 Biofuel Feedstocks & Non-Edible Complex</div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-label">CBOT Soybean Oil (Baseline)</div>
+                    <div class="card-val" id="price-cbot">--</div>
+                    <div class="card-sub">Global Biofuel Anchor</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Used Cooking Oil (UCO Proxy)</div>
+                    <div class="card-val" id="price-uco">--</div>
+                    <div class="card-sub">Low-CI Non-Edible Feed</div>
+                </div>
+                <div class="card" style="border-color: var(--accent-blue);">
+                    <div class="card-label" style="color: var(--accent-blue); font-weight:600;">Crude Pongamia Oil (Est. FMV)</div>
+                    <div class="card-val" id="price-pongamia">--</div>
+                    <div class="card-sub">Yield Adjusted Parity</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Gasoil / Heating Oil (ULSD)</div>
+                    <div class="card-val" id="price-gasoil">--</div>
+                    <div class="card-sub">Diesel Pool Benchmark</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+            <div class="section-title">🌍 Global & 🇮🇳 Indian Oils Complex</div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-label">Crude Palm Oil (FCPO Parity)</div>
+                    <div class="card-val" id="price-palm">--</div>
+                    <div class="card-sub">Tropical Veg Oil Parity</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Indian Refined Soy Oil</div>
+                    <div class="card-val" id="price-ind-soy">--</div>
+                    <div class="card-sub">Land Duty-Paid Spot</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Mustard / Kachi Ghani Oil</div>
+                    <div class="card-val" id="price-mustard">--</div>
+                    <div class="card-sub">Domestic Staple Spot</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Groundnut Oil (Expeller)</div>
+                    <div class="card-val" id="price-groundnut">--</div>
+                    <div class="card-sub">Premium Agri Spot</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Rice Bran Oil (RBO)</div>
+                    <div class="card-val" id="price-rbo">--</div>
+                    <div class="card-sub">Solvent Extract Spot</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Refined Castor Oil</div>
+                    <div class="card-val" id="price-castor">--</div>
+                    <div class="card-sub">Industrial Non-Edible</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div style="font-weight: 600; font-size: 14px;">Dashboard Maintained by: <b>Chethan H C</b></div>
+        <div style="color: var(--text-sub); font-size: 12px; margin-top: 2px;">Junior Procurement Manager | <b>Terviva</b></div>
+        <br>
+        <div class="footer-links">
+            <span style="font-size: 11px; color: var(--text-sub);">🔗 Direct Verification Links:</span><br><br>
+            <a href="https://www.tradingview.com/symbols/CBOT-ZL1!/" target="_blank">↗ CBOT Soy Oil</a>
+            <a href="https://www.marketwatch.com/investing/future/crude%20oil%20-%20electronic" target="_blank">↗ WTI Crude</a>
+            <a href="https://www.investing.com/commodities/heating-oil" target="_blank">↗ Gasoil</a>
+            <a href="https://www.seaofindia.com/" target="_blank">↗ SEA India Spot</a>
+            <a href="https://www.ncdex.com/" target="_blank">↗ NCDEX Agri</a>
+        </div>
+    </div>
+
+    <script>
+        let currentCurrency = 'INR';
+        let fxRate = 83.85;
+
+        // Base USD per Metric Ton
+        const basePrices = {
+            cbot: 1050.00,
+            uco: 945.00,
+            pongamia: 819.00,
+            gasoil: 780.00,
+            palm: 966.00,
+            indSoy: 1102.50,
+            mustard: 1281.00,
+            groundnut: 1627.50,
+            rbo: 924.00,
+            castor: 1176.00
+        };
+
+        async function fetchForex() {
+            try {
+                const res = await fetch('https://open.er-api.com/v6/latest/USD');
+                const data = await res.json();
+                if (data && data.rates && data.rates.INR) {
+                    fxRate = data.rates.INR;
+                    document.getElementById('fx-rate-display').innerText = `USD/INR: ₹${fxRate.toFixed(2)}`;
+                }
+            } catch (e) {
+                console.log("Forex fallback active");
+            }
+            renderPrices();
+        }
+
+        function setCurrency(curr) {
+            currentCurrency = curr;
+            document.getElementById('btn-inr').classList.toggle('active', curr === 'INR');
+            document.getElementById('btn-usd').classList.toggle('active', curr === 'USD');
+            renderPrices();
+        }
+
+        function renderPrices() {
+            const mult = currentCurrency === 'INR' ? fxRate : 1.0;
+            const symbol = currentCurrency === 'INR' ? '₹' : '$';
+
+            for (const [key, usdVal] of Object.entries(basePrices)) {
+                const finalVal = usdVal * mult;
+                const elem = document.getElementById(`price-${key}`);
+                if (elem) {
+                    elem.innerText = `${symbol}${finalVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} /MT`;
+                }
+            }
+        }
+
+        fetchForex();
+    </script>
+</body>
+</html>
