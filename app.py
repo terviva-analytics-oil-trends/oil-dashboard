@@ -9,16 +9,14 @@ st.set_page_config(
     page_title="Oil Market Intelligence | Chethan H C",
     page_icon="🛢️",
     layout="wide",
-    initial_sidebar_state="collapsed"  # Collapsed by default for clean mobile viewing
+    initial_sidebar_state="collapsed"
 )
 
-# Custom CSS for Android/Mobile Optimization & Executive Styling
+# Custom CSS for Mobile Optimization & Executive Styling
 st.markdown("""
     <style>
-    /* Dark Theme Base */
     .main { background-color: #0e1117; }
     
-    /* Mobile-Responsive Card Padding & Layout */
     @media (max-width: 768px) {
         .stMetric {
             padding: 10px !important;
@@ -35,7 +33,6 @@ st.markdown("""
         }
     }
 
-    /* Metric Card Custom Styling */
     div[data-testid="stMetric"] {
         background-color: #1e222d;
         padding: 15px;
@@ -44,7 +41,6 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
     
-    /* Executive Footer Styling */
     .executive-footer {
         background-color: #161b22;
         border-top: 1px solid #30363d;
@@ -106,13 +102,12 @@ def get_oil_data(ticker_symbol, unit_type, period):
         if df.empty:
             return None
         
-        # Convert raw unit to USD per Metric Ton (1 MT = 1,000 kg / 2,204.62 lbs)
         if unit_type == "cents_lb":
             df['USD_MT'] = (df['Close'] / 100.0) * 2204.622
         elif unit_type == "usd_barrel":
-            df['USD_MT'] = df['Close'] * 7.33  # ~7.33 barrels per MT crude
+            df['USD_MT'] = df['Close'] * 7.33
         elif unit_type == "usd_gal":
-            df['USD_MT'] = df['Close'] * 312.9  # ~312.9 gallons per MT diesel/gasoil
+            df['USD_MT'] = df['Close'] * 312.9
         elif unit_type == "usd_mt":
             df['USD_MT'] = df['Close']
         return df
@@ -142,7 +137,6 @@ ASSETS = {
     }
 }
 
-# Fetch Asset Data
 market_summary = []
 asset_data_store = {}
 
@@ -169,11 +163,11 @@ for cat_name, group in ASSETS.items():
                 "Description": meta["desc"]
             })
 
-# Navigation Tabs
 tab1, tab2, tab3 = st.tabs(["📊 Executive Overview", "📈 Comparison Chart", "📋 Summary Table"])
 
 # TAB 1: EXECUTIVE OVERVIEW CARDS
 with tab1:
+    chart_counter = 0
     for cat_name, group in ASSETS.items():
         st.subheader(f"📌 {cat_name}")
         cols = st.columns(len(group))
@@ -196,7 +190,6 @@ with tab1:
                     )
                     st.caption(f"1-Wk Change: **{chg_1w:+.2f}%**")
                     
-                    # Responsive Sparkline chart
                     fig = go.Figure()
                     fig.add_trace(go.Scatter(
                         x=df.index,
@@ -214,7 +207,13 @@ with tab1:
                         template="plotly_dark",
                         showlegend=False
                     )
-                    st.plotly_chart(fig, use_container_width=True, config={'responsive': True})
+                    chart_counter += 1
+                    st.plotly_chart(
+                        fig, 
+                        use_container_width=True, 
+                        key=f"spark_{chart_counter}", 
+                        config={'responsive': True}
+                    )
                 else:
                     st.warning(f"Data offline: {asset_name}")
 
@@ -247,7 +246,12 @@ with tab2:
             xaxis_title="Date",
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
-        st.plotly_chart(fig_multi, use_container_width=True, config={'responsive': True})
+        st.plotly_chart(
+            fig_multi, 
+            use_container_width=True, 
+            key="comparison_chart_overlay", 
+            config={'responsive': True}
+        )
 
 # TAB 3: MANAGEMENT SUMMARY TABLE
 with tab3:
@@ -281,7 +285,6 @@ with tab3:
             use_container_width=True
         )
 
-# EXECUTIVE FOOTER & CREDITS (ANDROID / MOBILE FRIENDLY)
 st.markdown("---")
 st.markdown("""
     <div class="executive-footer">
