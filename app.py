@@ -17,7 +17,6 @@ st.markdown("""
     <style>
     .main { background-color: #0d1117; padding-top: 10px; }
     
-    /* Prevent metric value truncation */
     div[data-testid="stMetricValue"] {
         font-size: 16px !important;
         font-weight: 700 !important;
@@ -27,16 +26,12 @@ st.markdown("""
         font-size: 12px !important;
         color: #8b949e !important;
     }
-    
-    /* Compact Metric Container */
     div[data-testid="stMetric"] {
         background-color: #161b22;
         padding: 8px 12px !important;
         border-radius: 6px;
         border: 1px solid #30363d;
     }
-    
-    /* Compact Section Headings */
     .section-header {
         color: #f0f6fc;
         font-size: 15px;
@@ -46,20 +41,6 @@ st.markdown("""
         border-bottom: 1px solid #21262d;
         padding-bottom: 4px;
     }
-
-    /* Guide Box Styling */
-    .guide-box {
-        background-color: #161b22;
-        border: 1px solid #30363d;
-        border-left: 4px solid #58a6ff;
-        padding: 12px 16px;
-        border-radius: 6px;
-        margin-bottom: 15px;
-        font-size: 13px;
-        color: #c9d1d9;
-    }
-
-    /* Footer styling */
     .executive-footer {
         background-color: #161b22;
         border-top: 1px solid #30363d;
@@ -70,8 +51,6 @@ st.markdown("""
     }
     .footer-title { color: #f0f6fc; font-size: 14px; font-weight: 600; }
     .footer-sub { color: #8b949e; font-size: 12px; }
-    
-    /* Link Buttons */
     .verify-btn {
         display: inline-block;
         background-color: #21262d;
@@ -86,11 +65,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Top Bar Header
+# Header Title
 st.title("🛢️ Oil Market Intelligence Dashboard")
 st.caption(f"Terviva Procurement Tracking | Last Updated: {datetime.now().strftime('%d %B %Y, %H:%M IST')}")
 
-# Controls in Top Horizontal Bar for Single-Screen View
+# Controls Header
 c_ctrl1, c_ctrl2, c_ctrl3 = st.columns([1, 1, 2])
 with c_ctrl1:
     currency = st.radio("Currency:", ("INR (₹)", "USD ($)"), horizontal=True)
@@ -100,14 +79,18 @@ with c_ctrl2:
 time_map = {"1 Month": "1mo", "3 Months": "3mo", "6 Months": "6mo", "1 Year": "1y"}
 period_val = time_map[timeframe]
 
-# Forex Fetch
-@st.cache_data(ttl=300)
+# Fast Fail-Safe Forex Fetcher
+@st.cache_data(ttl=600)
 def get_forex_rates():
     try:
-        usdinr = yf.Ticker("USDINR=X").history(period="1d")
-        return usdinr['Close'].iloc[-1] if not usdinr.empty else 83.50
+        data = yf.download("USDINR=X", period="1d", timeout=3, progress=False)
+        if not data.empty:
+            val = float(data['Close'].iloc[-1])
+            if val > 0:
+                return val
     except Exception:
-        return 83.50
+        pass
+    return 83.50
 
 fx_inr = get_forex_rates()
 curr_symbol = "₹" if currency == "INR (₹)" else "$"
@@ -116,39 +99,37 @@ multiplier = fx_inr if currency == "INR (₹)" else 1.0
 with c_ctrl3:
     st.info(f"💡 **Live USD/INR Rate:** ₹{fx_inr:.2f} | Standardized Unit: **1 Metric Ton (1,000 kg)**")
 
-# BEGINNER-FRIENDLY EXPLANATION BOX
+# Beginner Guide Box
 with st.expander("ℹ️ Market Guide: How Are These Prices Derived? (Click for Details)"):
     st.markdown("""
-    This dashboard tracks real-time global agricultural and energy market benchmarks to determine fair market pricing for procurement. Here is how the numbers are calculated:
+    This dashboard tracks real-time global agricultural and energy market benchmarks to determine fair market pricing for procurement:
 
-    1. **Public Commodities Exchange Data:**
-       - **CBOT (Chicago Board of Trade):** The global benchmark for Soybean Oil, setting the world floor price for liquid vegetable oils.
-       - **NYMEX / ICE:** Sets global energy standards for Crude Oil and Heating Oil / Diesel pools.
+    1. **Public Commodities Exchange Benchmarks:**
+       - **CBOT (Chicago Board of Trade):** Sets global reference pricing for Soybean Oil and liquid vegetable oils.
+       - **NYMEX / ICE:** Sets baseline values for energy, gasoil, and petroleum pools.
     
-    2. **Unit Standardization (Metric Tons):**
-       Global commodities trade in different raw units:
-       - *Soybean Oil* trades in **cents per pound (¢/lb)** $\\rightarrow$ converted to Metric Tons ($1\\text{ MT} = 2,204.62\\text{ lbs}$).
-       - *Crude Oil* trades in **dollars per barrel** $\\rightarrow$ converted to Metric Tons ($1\\text{ MT} \\approx 7.33\\text{ barrels}$).
-       - *Gasoil* trades in **dollars per gallon** $\\rightarrow$ converted to Metric Tons ($1\\text{ MT} \\approx 312.9\\text{ gallons}$).
-       
-       *This dashboard standardizes every price into **1 Metric Ton (1 MT = 1,000 kg)** so all oils can be compared equally.*
+    2. **Standardized Pricing Unit (Per Metric Ton):**
+       - *Soybean Oil* (cents/lb) $\\rightarrow$ converted to USD/MT ($1\\text{ MT} = 2,204.62\\text{ lbs}$).
+       - *Crude Oil* (USD/barrel) $\\rightarrow$ converted to USD/MT ($1\\text{ MT} \\approx 7.33\\text{ barrels}$).
+       - *Gasoil* (USD/gallon) $\\rightarrow$ converted to USD/MT ($1\\text{ MT} \\approx 312.9\\text{ gallons}$).
 
-    3. **Live Currency Conversion:**
-       All raw USD rates are automatically converted into **Indian Rupees (₹)** using live Forex exchange rates (`USD/INR`).
-
-    4. **Crude Pongamia & Non-Edible Oil Valuation (OTC Parity):**
-       Oils like **Crude Pongamia Oil** and **Used Cooking Oil (UCO)** do not have direct stock exchange tickers. Their Fair Market Value (FMV) is calculated using industry-standard pricing parity:
-       $$\\text{Pongamia FMV} = \\text{CBOT Soybean Baseline} - \\text{Quality / Free Fatty Acid (FFA) Discount}$$
+    3. **Non-Edible & Pongamia Oil Parity:**
+       Crude Pongamia Oil and Used Cooking Oil (UCO) pricing are modeled using market parity relative to CBOT Soybean Oil minus Free Fatty Acid (FFA) yield discounts.
     """)
 
-# Data Fetch Function
-@st.cache_data(ttl=300)
+# Fast Fail-Safe Market Fetcher
+@st.cache_data(ttl=600)
 def get_oil_data(ticker_symbol, unit_type, period):
     try:
-        df = yf.Ticker(ticker_symbol).history(period=period)
+        df = yf.download(ticker_symbol, period=period, timeout=3, progress=False)
         if df.empty:
             return None
         
+        # Flatten MultiIndex columns if returned by yfinance
+        if isinstance(df.columns, pd.MultiIndex):
+            df = df['Close']
+            df = pd.DataFrame({'Close': df.iloc[:, 0]})
+            
         if unit_type == "cents_lb":
             df['USD_MT'] = (df['Close'] / 100.0) * 2204.622
         elif unit_type == "usd_barrel":
@@ -161,12 +142,11 @@ def get_oil_data(ticker_symbol, unit_type, period):
     except Exception:
         return None
 
-# Master Asset Mapping
 ASSETS = {
     "Biofuel & Non-Edible Feedstocks": {
         "CBOT Soybean Oil (Baseline)": {"ticker": "ZL=F", "type": "cents_lb", "adj": 1.0},
         "Used Cooking Oil (UCO Proxy)": {"ticker": "ZL=F", "type": "cents_lb", "adj": 0.90},
-        "Crude Pongamia Oil (Est. FMV)": {"ticker": "ZL=F", "type": "cents_lb", "adj": 0.78},  # ~22% discount to Soy for crude/FFA
+        "Crude Pongamia Oil (Est. FMV)": {"ticker": "ZL=F", "type": "cents_lb", "adj": 0.78},
         "Gasoil / Heating Oil (ULSD)": {"ticker": "HO=F", "type": "usd_gal", "adj": 1.0},
         "Brent Crude Oil": {"ticker": "BZ=F", "type": "usd_barrel", "adj": 1.0},
     },
@@ -185,43 +165,36 @@ ASSETS = {
     }
 }
 
-# Fetch all data
 asset_data_store = {}
 market_summary = []
 
 for cat_name, group in ASSETS.items():
     for asset_name, meta in group.items():
         df = get_oil_data(meta["ticker"], meta["type"], period_val)
-        if df is not None and len(df) >= 5:
+        if df is not None and len(df) >= 2:
             df['Final_Display_MT'] = df['USD_MT'] * meta['adj'] * multiplier
             asset_data_store[asset_name] = df
             
-            latest = df['Final_Display_MT'].iloc[-1]
-            prev_1d = df['Final_Display_MT'].iloc[-2]
-            prev_1w = df['Final_Display_MT'].iloc[-5]
-            
+            latest = float(df['Final_Display_MT'].iloc[-1])
+            prev_1d = float(df['Final_Display_MT'].iloc[-2])
             chg_1d = ((latest - prev_1d) / prev_1d) * 100
-            chg_1w = ((latest - prev_1w) / prev_1w) * 100
             
             market_summary.append({
                 "Category": cat_name,
                 "Commodity": asset_name,
                 "Price per MT": latest,
-                "1-Day Chg (%)": chg_1d,
-                "1-Week Chg (%)": chg_1w
+                "1-Day Chg (%)": chg_1d
             })
 
-# SIDE-BY-SIDE EXECUTIVE DASHBOARD LAYOUT (2 MAIN COLUMNS)
 left_col, right_col = st.columns([1, 1])
-
 chart_id_counter = 0
 
 def render_compact_card(container, asset_name):
     global chart_id_counter
     if asset_name in asset_data_store:
         df = asset_data_store[asset_name]
-        latest = df['Final_Display_MT'].iloc[-1]
-        prev_1d = df['Final_Display_MT'].iloc[-2]
+        latest = float(df['Final_Display_MT'].iloc[-1])
+        prev_1d = float(df['Final_Display_MT'].iloc[-2])
         chg_1d = ((latest - prev_1d) / prev_1d) * 100
         
         container.metric(
@@ -246,19 +219,18 @@ def render_compact_card(container, asset_name):
         )
         chart_id_counter += 1
         container.plotly_chart(fig, use_container_width=True, key=f"c_{chart_id_counter}", config={'displayModeBar': False})
+    else:
+        container.info(f"{asset_name}: Updating...")
 
-# LEFT COLUMN: BIOFUELS & PONGAMIA MODEL
 with left_col:
     st.markdown('<div class="section-header">🌱 Biofuel Feedstocks & Non-Edible Complex</div>', unsafe_allow_html=True)
     bio_assets = list(ASSETS["Biofuel & Non-Edible Feedstocks"].keys())
-    
     for i in range(0, len(bio_assets), 2):
         c1, c2 = st.columns(2)
         render_compact_card(c1, bio_assets[i])
         if i + 1 < len(bio_assets):
             render_compact_card(c2, bio_assets[i+1])
 
-# RIGHT COLUMN: GLOBAL EDIBLE & INDIAN DOMESTIC OILS
 with right_col:
     st.markdown('<div class="section-header">🌍 Global Edible Oils</div>', unsafe_allow_html=True)
     edible_assets = list(ASSETS["Global Edible Oils Complex"].keys())
@@ -277,7 +249,6 @@ with right_col:
         if i + 1 < len(ind_assets):
             render_compact_card(c2, ind_assets[i+1])
 
-# LOWER EXPANDABLE TABS FOR DEEPER ANALYSIS
 st.markdown("---")
 with st.expander("📈 Interactive Multi-Asset Trend Overlay & Summary Table"):
     t1, t2 = st.tabs(["Overlay Chart", "Summary Table"])
@@ -285,7 +256,7 @@ with st.expander("📈 Interactive Multi-Asset Trend Overlay & Summary Table"):
         selected_assets = st.multiselect(
             "Select Oils to Compare:",
             options=list(asset_data_store.keys()),
-            default=["CBOT Soybean Oil (Baseline)", "Crude Pongamia Oil (Est. FMV)", "Used Cooking Oil (UCO Proxy)", "Groundnut Oil (Expeller)"]
+            default=[k for k in ["CBOT Soybean Oil (Baseline)", "Crude Pongamia Oil (Est. FMV)", "Used Cooking Oil (UCO Proxy)"] if k in asset_data_store]
         )
         if selected_assets:
             fig_multi = go.Figure()
@@ -299,10 +270,8 @@ with st.expander("📈 Interactive Multi-Asset Trend Overlay & Summary Table"):
             sum_df = pd.DataFrame(market_summary)
             sum_df["Price per MT"] = sum_df["Price per MT"].apply(lambda x: f"{curr_symbol}{x:,.2f} /MT")
             sum_df["1-Day Chg (%)"] = sum_df["1-Day Chg (%)"].apply(lambda x: f"{x:+.2f}%")
-            sum_df["1-Week Chg (%)"] = sum_df["1-Week Chg (%)"].apply(lambda x: f"{x:+.2f}%")
             st.dataframe(sum_df, use_container_width=True, hide_index=True)
 
-# EXECUTIVE FOOTER WITH CREDENTIALS AND DIRECT VERIFICATION LINKS
 st.markdown("""
     <div class="executive-footer">
         <div class="footer-title">Dashboard Maintained by: <b>Chethan H C</b></div>
