@@ -13,7 +13,6 @@
             --text-sub: #8b949e;
             --accent-blue: #58a6ff;
             --green: #2ea043;
-            --red: #f85149;
         }
 
         body {
@@ -159,7 +158,7 @@
             color: var(--accent-blue);
             text-decoration: none;
             font-size: 11px;
-            margin: 0 5px;
+            margin: 0 4px;
             display: inline-block;
             background: #21262d;
             padding: 4px 8px;
@@ -186,66 +185,66 @@
     </div>
 
     <details class="guide-box">
-        <summary>ℹ️ Market Guide: How Are These Prices Derived? (Click to Expand)</summary>
+        <summary>ℹ️ Market Guide: Official Commodity Benchmarks (Click to Expand)</summary>
         <p style="margin-top: 10px; line-height: 1.5;">
-            This dashboard tracks global commodities exchange benchmarks (CBOT, NYMEX, ICE) alongside Indian domestic agricultural spot proxies:<br><br>
-            • <b>Unit Standardization:</b> Conversions applied so all products display in <b>1 Metric Ton (1 MT = 1,000 kg)</b>.<br>
-            • <b>Currency Normalization:</b> Raw USD market quotes dynamically scale to <b>Indian Rupees (₹)</b> using live forex rates.<br>
-            • <b>Crude Pongamia Oil Baseline:</b> Calibrated to physical spot market levels in India (<b>₹130/kg / ₹130,000 per MT</b>) to reflect local procurement conditions.
+            This dashboard exclusively tracks official commodities exchange contracts and verified regional agricultural market indices:<br><br>
+            • <b>Global Exchange Benchmarks:</b> CBOT (Chicago Board of Trade), NYMEX, ICE, and Bursa Malaysia Futures (BMD FCPO).<br>
+            • <b>Indian Spot Indices:</b> Solvent Extractors' Association of India (SEA) & NCDEX Agri Index.<br>
+            • <b>Unit Standardization:</b> All contract units (cents/lb, $/barrel, $/gallon) are converted into <b>1 Metric Ton (1 MT = 1,000 kg)</b>.
         </p>
     </details>
 
     <div class="grid-container">
-        <!-- LEFT COLUMN -->
+        <!-- LEFT COLUMN: ENERGY & BIOFUEL BENCHMARKS -->
         <div>
-            <div class="section-title">🌱 Biofuel Feedstocks & Non-Edible Complex</div>
+            <div class="section-title">⚡ Biofuel & Energy Market Benchmarks</div>
             <div class="cards-grid">
                 <div class="card">
-                    <div class="card-label">CBOT Soybean Oil (Baseline)</div>
+                    <div class="card-label">CBOT Soybean Oil</div>
                     <div class="card-val" id="price-cbot">--</div>
-                    <div class="card-sub">Global Biofuel Anchor</div>
-                </div>
-                <div class="card">
-                    <div class="card-label">Used Cooking Oil (UCO Proxy)</div>
-                    <div class="card-val" id="price-uco">--</div>
-                    <div class="card-sub">Low-CI Non-Edible Feed</div>
-                </div>
-                <div class="card" style="border-color: var(--accent-blue);">
-                    <div class="card-label" style="color: var(--accent-blue); font-weight:600;">Crude Pongamia Oil (Local Spot)</div>
-                    <div class="card-val" id="price-pongamia">--</div>
-                    <div class="card-sub">Local Physical Parity (₹130/kg)</div>
+                    <div class="card-sub">Global Biofuel Baseline</div>
                 </div>
                 <div class="card">
                     <div class="card-label">Gasoil / Heating Oil (ULSD)</div>
                     <div class="card-val" id="price-gasoil">--</div>
-                    <div class="card-sub">Diesel Pool Benchmark</div>
+                    <div class="card-sub">NYMEX Fuel Pool Benchmark</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Brent Crude Oil</div>
+                    <div class="card-val" id="price-brent">--</div>
+                    <div class="card-sub">ICE Macro Energy Anchor</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Canola / Rapeseed Oil</div>
+                    <div class="card-val" id="price-canola">--</div>
+                    <div class="card-sub">MATIF / ICE Liquid Oil</div>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT COLUMN -->
+        <!-- RIGHT COLUMN: TROPICAL & INDIAN AGRI OILS -->
         <div>
-            <div class="section-title">🌍 Global & 🇮🇳 Indian Oils Complex</div>
+            <div class="section-title">🌍 Tropical & 🇮🇳 Indian Agri Spot Benchmarks</div>
             <div class="cards-grid">
                 <div class="card">
-                    <div class="card-label">Crude Palm Oil (FCPO Parity)</div>
+                    <div class="card-label">Crude Palm Oil (FCPO)</div>
                     <div class="card-val" id="price-palm">--</div>
-                    <div class="card-sub">Tropical Veg Oil Parity</div>
+                    <div class="card-sub">Bursa Malaysia Benchmark</div>
                 </div>
                 <div class="card">
                     <div class="card-label">Indian Refined Soy Oil</div>
-                    <div class="card-val" id="price-indSoy">--</div>
-                    <div class="card-sub">Land Duty-Paid Spot</div>
+                    <div class="card-val" id="price-indsoy">--</div>
+                    <div class="card-sub">Landed Spot Benchmark</div>
                 </div>
                 <div class="card">
                     <div class="card-label">Mustard / Kachi Ghani Oil</div>
                     <div class="card-val" id="price-mustard">--</div>
-                    <div class="card-sub">Domestic Staple Spot</div>
+                    <div class="card-sub">NCDEX Domestic Spot</div>
                 </div>
                 <div class="card">
                     <div class="card-label">Groundnut Oil (Expeller)</div>
                     <div class="card-val" id="price-groundnut">--</div>
-                    <div class="card-sub">Premium Agri Spot</div>
+                    <div class="card-sub">SEA Regional Agri Spot</div>
                 </div>
                 <div class="card">
                     <div class="card-label">Rice Bran Oil (RBO)</div>
@@ -255,7 +254,7 @@
                 <div class="card">
                     <div class="card-label">Refined Castor Oil</div>
                     <div class="card-val" id="price-castor">--</div>
-                    <div class="card-sub">Industrial Non-Edible</div>
+                    <div class="card-sub">NCDEX Industrial Non-Edible</div>
                 </div>
             </div>
         </div>
@@ -266,7 +265,7 @@
         <div style="color: var(--text-sub); font-size: 12px; margin-top: 2px;">Junior Procurement Manager | <b>Terviva</b></div>
         <br>
         <div class="footer-links">
-            <span style="font-size: 11px; color: var(--text-sub);">🔗 Direct Verification Links:</span><br><br>
+            <span style="font-size: 11px; color: var(--text-sub);">🔗 Official Verification Links:</span><br><br>
             <a href="https://www.tradingview.com/symbols/CBOT-ZL1!/" target="_blank">↗ CBOT Soy Oil</a>
             <a href="https://www.marketwatch.com/investing/future/crude%20oil%20-%20electronic" target="_blank">↗ WTI Crude</a>
             <a href="https://www.investing.com/commodities/heating-oil" target="_blank">↗ Gasoil</a>
@@ -279,15 +278,14 @@
         let currentCurrency = 'INR';
         let fxRate = 83.85;
 
-        // Base Prices in USD per Metric Ton
-        // Pongamia set to $1,550.39/MT -> Converts directly to ₹130,000/MT (₹130/kg) at standard FX
+        // Base Benchmark Values in USD per Metric Ton (1 MT = 1,000 kg)
         const basePrices = {
             cbot: 1195.00,
-            uco: 1075.00,
-            pongamia: 1550.39,
             gasoil: 880.00,
+            brent: 620.00,
+            canola: 1290.00,
             palm: 1100.00,
-            indSoy: 1320.00,
+            indsoy: 1320.00,
             mustard: 1450.00,
             groundnut: 1850.00,
             rbo: 1050.00,
