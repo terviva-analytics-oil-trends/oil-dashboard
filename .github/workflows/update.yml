@@ -1,0 +1,33 @@
+name: Auto Daily Market Updater
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # Runs automatically every day at 1:00 AM UTC (6:30 AM IST)
+  workflow_dispatch:      # Allows manual trigger anytime from GitHub UI
+
+jobs:
+  update-market-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: |
+          pip install yfinance pandas pytz
+
+      - name: Execute Daily Price Sync
+        run: |
+          python update_data.py
+
+      - name: Auto-Commit & Deploy Updated Prices
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update market prices [skip ci]" && git push)
