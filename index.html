@@ -6,16 +6,16 @@
     <title>Terviva | SAF & Biofuel Market Dynamics Dashboard</title>
     <style>
         :root {
-            --bg-color: #F4F4EE;        /* Terviva Template Off-White */
+            --bg-color: #F4F4EE;
             --card-bg: #FFFFFF;
             --border-color: #DCDCCF;
-            --text-dark: #1B3323;       /* Terviva Dark Forest Green */
+            --text-dark: #1B3323;
             --text-sub: #5A6E60;
             --terviva-green: #1B3323;
-            --terviva-leaf: #7BB343;     /* Terviva Leaf Green Accent */
-            --edible-color: #2E7D32;    /* Green Badge for Edible Oils */
+            --terviva-leaf: #7BB343;
+            --edible-color: #2E7D32;
             --edible-bg: #E8F5E9;
-            --nonedible-color: #D97706; /* Amber Gold Badge for SAF & Industrial Feedstocks */
+            --nonedible-color: #D97706;
             --nonedible-bg: #FEF3C7;
             --trend-up: #2E7D32;
             --trend-down: #C62828;
@@ -29,7 +29,6 @@
             padding: 18px;
         }
 
-        /* Top Brand Header */
         .brand-bar {
             display: flex;
             align-items: center;
@@ -102,7 +101,6 @@
             border-color: var(--terviva-leaf);
         }
 
-        /* Classification Banner */
         .legend-bar {
             display: flex;
             align-items: center;
@@ -145,7 +143,6 @@
             border: 1px solid var(--nonedible-color);
         }
 
-        /* Purpose & Benchmark Guide Box (Collapsed by default) */
         .guide-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -180,7 +177,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -218,13 +214,8 @@
             position: relative;
         }
 
-        .card.card-edible {
-            border-top: 4px solid var(--edible-color);
-        }
-
-        .card.card-nonedible {
-            border-top: 4px solid var(--nonedible-color);
-        }
+        .card.card-edible { border-top: 4px solid var(--edible-color); }
+        .card.card-nonedible { border-top: 4px solid var(--nonedible-color); }
 
         .card-header-flex {
             display: flex;
@@ -267,15 +258,8 @@
             gap: 2px;
         }
 
-        .trend-pill.up {
-            background-color: #E8F5E9;
-            color: var(--trend-up);
-        }
-
-        .trend-pill.down {
-            background-color: #FFEBEE;
-            color: var(--trend-down);
-        }
+        .trend-pill.up { background-color: #E8F5E9; color: var(--trend-up); }
+        .trend-pill.down { background-color: #FFEBEE; color: var(--trend-down); }
 
         .card-sub {
             font-size: 11px;
@@ -313,7 +297,6 @@
 </head>
 <body>
 
-    <!-- BRAND TOP BAR WITH LAST UPDATED STAMP -->
     <div class="brand-bar">
         <div class="brand-logo-title">
             <span class="brand-name">TERVIVA</span>
@@ -334,7 +317,6 @@
         </div>
     </div>
 
-    <!-- CLASSIFICATION LEGEND -->
     <div class="legend-bar">
         <span>PRODUCT CLASSIFICATION:</span>
         <div class="legend-tags">
@@ -343,7 +325,6 @@
         </div>
     </div>
 
-    <!-- PURPOSE & BENCHMARK GUIDE (COLLAPSED BY DEFAULT) -->
     <details class="guide-box">
         <summary>🎯 Dashboard Purpose & SAF Feedstock Benchmark Guide (Click to Expand)</summary>
         <div class="guide-content">
@@ -352,201 +333,102 @@
 
             <div class="guide-section-title">💡 Key SAF & Biofuel Competitor Benchmarks</div>
             <ul>
-                <li><b>Used Cooking Oil (UCO / Yellow Grease):</b> The primary non-edible waste feedstock for HEFA SAF and Renewable Diesel worldwide, setting low-CI valuation standards.</li>
-                <li><b>Technical Tallow (Animal Fats Cat 1/2/3):</b> A major non-edible waste lipid competing directly with plant-based waste oils for European and US SAF refiners.</li>
-                <li><b>Distillers Corn Oil (DCO / Inedible Corn Oil):</b> A low-CI inedible byproduct from ethanol processing heavily utilized in North American renewable fuel blending.</li>
-                <li><b>Palm Oil Mill Effluent (POME / PAO):</b> Non-edible waste residue from tropical oil milling, highly valued for SAF compliance under EU RED III.</li>
+                <li><b>Used Cooking Oil (UCO / Yellow Grease):</b> The primary non-edible waste feedstock for HEFA SAF and Renewable Diesel worldwide.</li>
+                <li><b>Technical Tallow (Animal Fats Cat 1/2/3):</b> A major non-edible waste lipid competing directly with plant-based waste oils.</li>
+                <li><b>Distillers Corn Oil (DCO / Inedible Corn Oil):</b> A low-CI inedible byproduct from ethanol processing.</li>
+                <li><b>Palm Oil Mill Effluent (POME / PAO):</b> Non-edible waste residue from tropical oil milling.</li>
                 <li><b>CBOT Soybean & Canola Oil:</b> Primary agricultural liquid oil baselines that set the price ceiling for virgin vegetable oil hydrotreating.</li>
-                <li><b>Gasoil / Heating Oil & Brent Crude:</b> Energy market anchors that dictate the economic parity and margin spreads (e.g., BO-HO spread) between petroleum and bio-feedstocks.</li>
+                <li><b>Gasoil / Heating Oil & Brent Crude:</b> Energy market anchors that dictate economic parity and margin spreads between petroleum and bio-feedstocks.</li>
             </ul>
         </div>
     </details>
 
-    <!-- DASHBOARD CARDS GRID -->
     <div class="grid-container">
-        
-        <!-- LEFT COLUMN: SAF, BIOFUEL & NON-EDIBLE COMPLEX -->
         <div>
             <div class="section-header">⚡ SAF, Biofuel & Non-Edible Feedstocks</div>
             <div class="cards-grid">
-                <!-- UCO -->
                 <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Used Cooking Oil (UCO)</span>
-                        <span class="legend-tag tag-nonedible">SAF Feedstock</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Used Cooking Oil (UCO)</span><span class="legend-tag tag-nonedible">SAF Feedstock</span></div>
                     <div class="card-val" id="price-uco">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-uco">--</span>
-                        <span class="trend-pill" id="chg1w-uco">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-uco">--</span><span class="trend-pill" id="chg1w-uco">--</span></div>
                     <div class="card-sub">Primary Low-CI Waste Anchor</div>
                 </div>
-
-                <!-- Technical Tallow -->
                 <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Technical Tallow (Cat 1/2)</span>
-                        <span class="legend-tag tag-nonedible">SAF Feedstock</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Technical Tallow (Cat 1/2)</span><span class="legend-tag tag-nonedible">SAF Feedstock</span></div>
                     <div class="card-val" id="price-tallow">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-tallow">--</span>
-                        <span class="trend-pill" id="chg1w-tallow">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-tallow">--</span><span class="trend-pill" id="chg1w-tallow">--</span></div>
                     <div class="card-sub">Inedible Animal Fat Benchmark</div>
                 </div>
-
-                <!-- Distillers Corn Oil -->
                 <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Distillers Corn Oil (DCO)</span>
-                        <span class="legend-tag tag-nonedible">SAF Feedstock</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Distillers Corn Oil (DCO)</span><span class="legend-tag tag-nonedible">SAF Feedstock</span></div>
                     <div class="card-val" id="price-dco">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-dco">--</span>
-                        <span class="trend-pill" id="chg1w-dco">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-dco">--</span><span class="trend-pill" id="chg1w-dco">--</span></div>
                     <div class="card-sub">Inedible Ethanol Byproduct</div>
                 </div>
-
-                <!-- POME / PAO -->
                 <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Palm Mill Effluent (POME)</span>
-                        <span class="legend-tag tag-nonedible">SAF Feedstock</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Palm Mill Effluent (POME)</span><span class="legend-tag tag-nonedible">SAF Feedstock</span></div>
                     <div class="card-val" id="price-pome">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-pome">--</span>
-                        <span class="trend-pill" id="chg1w-pome">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-pome">--</span><span class="trend-pill" id="chg1w-pome">--</span></div>
                     <div class="card-sub">Asian Low-CI Residue Parity</div>
                 </div>
-
-                <!-- Gasoil -->
                 <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Gasoil / Heating Oil</span>
-                        <span class="legend-tag tag-nonedible">Energy</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Gasoil / Heating Oil</span><span class="legend-tag tag-nonedible">Energy</span></div>
                     <div class="card-val" id="price-gasoil">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-gasoil">--</span>
-                        <span class="trend-pill" id="chg1w-gasoil">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-gasoil">--</span><span class="trend-pill" id="chg1w-gasoil">--</span></div>
                     <div class="card-sub">NYMEX ULSD Fuel Pool</div>
                 </div>
-
-                <!-- Brent Crude -->
                 <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Brent Crude Oil</span>
-                        <span class="legend-tag tag-nonedible">Energy</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Brent Crude Oil</span><span class="legend-tag tag-nonedible">Energy</span></div>
                     <div class="card-val" id="price-brent">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-brent">--</span>
-                        <span class="trend-pill" id="chg1w-brent">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-brent">--</span><span class="trend-pill" id="chg1w-brent">--</span></div>
                     <div class="card-sub">ICE Energy Macro Anchor</div>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: GLOBAL EDIBLE & INDIAN AGRI COMPLEX -->
         <div>
             <div class="section-header">🟢 Global Edible & Indian Spot Complex</div>
             <div class="cards-grid">
-                <!-- CBOT Soy -->
                 <div class="card card-edible">
-                    <div class="card-header-flex">
-                        <span class="card-label">CBOT Soybean Oil</span>
-                        <span class="legend-tag tag-edible">Edible</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">CBOT Soybean Oil</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-cbot">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-cbot">--</span>
-                        <span class="trend-pill" id="chg1w-cbot">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-cbot">--</span><span class="trend-pill" id="chg1w-cbot">--</span></div>
                     <div class="card-sub">Global Veg Oil Baseline</div>
                 </div>
-
-                <!-- Palm Oil -->
                 <div class="card card-edible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Crude Palm Oil (FCPO)</span>
-                        <span class="legend-tag tag-edible">Edible</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Crude Palm Oil (FCPO)</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-palm">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-palm">--</span>
-                        <span class="trend-pill" id="chg1w-palm">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-palm">--</span><span class="trend-pill" id="chg1w-palm">--</span></div>
                     <div class="card-sub">Bursa Malaysia Benchmark</div>
                 </div>
-
-                <!-- Canola -->
                 <div class="card card-edible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Canola / Rapeseed Oil</span>
-                        <span class="legend-tag tag-edible">Edible</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Canola / Rapeseed Oil</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-canola">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-canola">--</span>
-                        <span class="trend-pill" id="chg1w-canola">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-canola">--</span><span class="trend-pill" id="chg1w-canola">--</span></div>
                     <div class="card-sub">MATIF / ICE Liquid Oil</div>
                 </div>
-
-                <!-- Indian Soy -->
                 <div class="card card-edible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Indian Refined Soy Oil</span>
-                        <span class="legend-tag tag-edible">Edible</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Indian Refined Soy Oil</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-indsoy">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-indsoy">--</span>
-                        <span class="trend-pill" id="chg1w-indsoy">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-indsoy">--</span><span class="trend-pill" id="chg1w-indsoy">--</span></div>
                     <div class="card-sub">Landed Spot Benchmark</div>
                 </div>
-
-                <!-- Mustard -->
                 <div class="card card-edible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Mustard / Kachi Ghani</span>
-                        <span class="legend-tag tag-edible">Edible</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Mustard / Kachi Ghani</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-mustard">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-mustard">--</span>
-                        <span class="trend-pill" id="chg1w-mustard">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-mustard">--</span><span class="trend-pill" id="chg1w-mustard">--</span></div>
                     <div class="card-sub">NCDEX Domestic Spot</div>
                 </div>
-
-                <!-- Refined Castor -->
                 <div class="card card-nonedible">
-                    <div class="card-header-flex">
-                        <span class="card-label">Refined Castor Oil</span>
-                        <span class="legend-tag tag-nonedible">Industrial</span>
-                    </div>
+                    <div class="card-header-flex"><span class="card-label">Refined Castor Oil</span><span class="legend-tag tag-nonedible">Industrial</span></div>
                     <div class="card-val" id="price-castor">--</div>
-                    <div class="trend-container">
-                        <span class="trend-pill" id="chg1d-castor">--</span>
-                        <span class="trend-pill" id="chg1w-castor">--</span>
-                    </div>
+                    <div class="trend-container"><span class="trend-pill" id="chg1d-castor">--</span><span class="trend-pill" id="chg1w-castor">--</span></div>
                     <div class="card-sub">NCDEX Industrial Non-Edible</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <div class="footer">
         <div style="font-weight: 700; font-size: 15px;">Dashboard Maintained by: <b>Chethan H C</b></div>
         <div style="color: #A3E4D7; font-size: 12px; margin-top: 2px;">Terviva Market Analytics</div>
@@ -565,8 +447,7 @@
         let currentCurrency = 'INR';
         let fxRate = 83.85;
 
-        // Base Benchmark Values (USD/MT) with 1D & 1W Changes
-        const marketData = {
+        let marketData = {
             uco: { usd: 1025.00, chg1d: 1.10, chg1w: 2.45 },
             tallow: { usd: 1080.00, chg1d: 0.65, chg1w: -0.90 },
             dco: { usd: 1040.00, chg1d: 0.80, chg1w: 1.15 },
@@ -581,25 +462,21 @@
             castor: { usd: 1335.00, chg1d: 0.75, chg1w: 1.50 }
         };
 
-        function setLastUpdatedStamp() {
-            const now = new Date();
-            const options = { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' };
-            document.getElementById('last-updated-stamp').innerText = `Last Updated: ${now.toLocaleString('en-IN', options)} IST`;
-        }
-
-        async function fetchForex() {
+        async function fetchAutoData() {
             try {
-                const res = await fetch('https://open.er-api.com/v6/latest/USD');
-                const data = await res.json();
-                if (data && data.rates && data.rates.INR) {
-                    fxRate = data.rates.INR;
-                    document.getElementById('fx-rate-display').innerText = `USD/INR: ₹${fxRate.toFixed(2)}`;
+                const res = await fetch('data.json?t=' + new Date().getTime());
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.fx_rate) fxRate = data.fx_rate;
+                    if (data.last_updated) {
+                        document.getElementById('last-updated-stamp').innerText = `Last Updated: ${data.last_updated}`;
+                    }
+                    if (data.prices) marketData = data.prices;
                 }
             } catch (e) {
-                console.log("Forex fallback active");
+                console.log("Using default price data");
             }
             renderPrices();
-            setLastUpdatedStamp();
         }
 
         function setCurrency(curr) {
@@ -612,6 +489,7 @@
         function renderPrices() {
             const mult = currentCurrency === 'INR' ? fxRate : 1.0;
             const symbol = currentCurrency === 'INR' ? '₹' : '$';
+            document.getElementById('fx-rate-display').innerText = `USD/INR: ₹${fxRate.toFixed(2)}`;
 
             for (const [key, item] of Object.entries(marketData)) {
                 const finalVal = item.usd * mult;
@@ -636,7 +514,7 @@
             }
         }
 
-        fetchForex();
+        fetchAutoData();
     </script>
 </body>
 </html>
