@@ -2,14 +2,14 @@ name: Auto Daily Market Updater
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # Runs automatically every day at 1:00 AM UTC (6:30 AM IST)
-  workflow_dispatch:      # Allows manual trigger anytime from GitHub UI
+    - cron: '17 1 * * *'  # Runs at 1:17 AM UTC (6:47 AM IST) to avoid top-of-the-hour server queues
+  workflow_dispatch:
 
 jobs:
   update-market-data:
     runs-on: ubuntu-latest
     permissions:
-      contents: write     # Authorizes the bot to push data.json updates
+      contents: write
 
     steps:
       - name: Checkout Repository
