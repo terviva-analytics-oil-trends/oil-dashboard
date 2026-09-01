@@ -244,18 +244,19 @@
         .trend-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
             margin-top: 6px;
+            flex-wrap: wrap;
         }
 
         .trend-pill {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            padding: 2px 6px;
+            padding: 2px 5px;
             border-radius: 4px;
             display: inline-flex;
             align-items: center;
-            gap: 2px;
+            gap: 1px;
         }
 
         .trend-pill.up { background-color: #E8F5E9; color: var(--trend-up); }
@@ -329,7 +330,7 @@
         <summary>🎯 Dashboard Purpose & SAF Feedstock Benchmark Guide (Click to Expand)</summary>
         <div class="guide-content">
             <div class="guide-section-title">📌 Purpose of this Webpage</div>
-            This platform monitors global price dynamics, trend momentum, and market valuation across low-Carbon Intensity (CI) feedstocks essential for <b>Sustainable Aviation Fuel (SAF - HEFA pathway)</b>, <b>Renewable Diesel (HVO)</b>, and agricultural vegetable oil complexes. All assets are standardized to <b>1 Metric Ton (1,000 kg)</b> in <b>INR (₹)</b> and <b>USD ($)</b> with real-time 1-Day (1D) and 1-Week (1W) percentage change trends.
+            This platform monitors global price dynamics, trend momentum, and market valuation across low-Carbon Intensity (CI) feedstocks essential for <b>Sustainable Aviation Fuel (SAF - HEFA pathway)</b>, <b>Renewable Diesel (HVO)</b>, and agricultural vegetable oil complexes. All assets are standardized to <b>1 Metric Ton (1,000 kg)</b> in <b>INR (₹)</b> and <b>USD ($)</b> with real-time 1D, 1W, 1M, and 1Y percentage change trends.
 
             <div class="guide-section-title">💡 Key SAF & Biofuel Competitor Benchmarks</div>
             <ul>
@@ -350,37 +351,67 @@
                 <div class="card card-nonedible">
                     <div class="card-header-flex"><span class="card-label">Used Cooking Oil (UCO)</span><span class="legend-tag tag-nonedible">SAF Feedstock</span></div>
                     <div class="card-val" id="price-uco">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-uco">--</span><span class="trend-pill" id="chg1w-uco">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-uco">--</span>
+                        <span class="trend-pill" id="chg1w-uco">--</span>
+                        <span class="trend-pill" id="chg1m-uco">--</span>
+                        <span class="trend-pill" id="chg1y-uco">--</span>
+                    </div>
                     <div class="card-sub">Primary Low-CI Waste Anchor</div>
                 </div>
                 <div class="card card-nonedible">
                     <div class="card-header-flex"><span class="card-label">Technical Tallow (Cat 1/2)</span><span class="legend-tag tag-nonedible">SAF Feedstock</span></div>
                     <div class="card-val" id="price-tallow">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-tallow">--</span><span class="trend-pill" id="chg1w-tallow">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-tallow">--</span>
+                        <span class="trend-pill" id="chg1w-tallow">--</span>
+                        <span class="trend-pill" id="chg1m-tallow">--</span>
+                        <span class="trend-pill" id="chg1y-tallow">--</span>
+                    </div>
                     <div class="card-sub">Inedible Animal Fat Benchmark</div>
                 </div>
                 <div class="card card-nonedible">
                     <div class="card-header-flex"><span class="card-label">Distillers Corn Oil (DCO)</span><span class="legend-tag tag-nonedible">SAF Feedstock</span></div>
                     <div class="card-val" id="price-dco">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-dco">--</span><span class="trend-pill" id="chg1w-dco">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-dco">--</span>
+                        <span class="trend-pill" id="chg1w-dco">--</span>
+                        <span class="trend-pill" id="chg1m-dco">--</span>
+                        <span class="trend-pill" id="chg1y-dco">--</span>
+                    </div>
                     <div class="card-sub">Inedible Ethanol Byproduct</div>
                 </div>
                 <div class="card card-nonedible">
                     <div class="card-header-flex"><span class="card-label">Palm Mill Effluent (POME)</span><span class="legend-tag tag-nonedible">SAF Feedstock</span></div>
                     <div class="card-val" id="price-pome">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-pome">--</span><span class="trend-pill" id="chg1w-pome">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-pome">--</span>
+                        <span class="trend-pill" id="chg1w-pome">--</span>
+                        <span class="trend-pill" id="chg1m-pome">--</span>
+                        <span class="trend-pill" id="chg1y-pome">--</span>
+                    </div>
                     <div class="card-sub">Asian Low-CI Residue Parity</div>
                 </div>
                 <div class="card card-nonedible">
                     <div class="card-header-flex"><span class="card-label">Gasoil / Heating Oil</span><span class="legend-tag tag-nonedible">Energy</span></div>
                     <div class="card-val" id="price-gasoil">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-gasoil">--</span><span class="trend-pill" id="chg1w-gasoil">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-gasoil">--</span>
+                        <span class="trend-pill" id="chg1w-gasoil">--</span>
+                        <span class="trend-pill" id="chg1m-gasoil">--</span>
+                        <span class="trend-pill" id="chg1y-gasoil">--</span>
+                    </div>
                     <div class="card-sub">NYMEX ULSD Fuel Pool</div>
                 </div>
                 <div class="card card-nonedible">
                     <div class="card-header-flex"><span class="card-label">Brent Crude Oil</span><span class="legend-tag tag-nonedible">Energy</span></div>
                     <div class="card-val" id="price-brent">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-brent">--</span><span class="trend-pill" id="chg1w-brent">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-brent">--</span>
+                        <span class="trend-pill" id="chg1w-brent">--</span>
+                        <span class="trend-pill" id="chg1m-brent">--</span>
+                        <span class="trend-pill" id="chg1y-brent">--</span>
+                    </div>
                     <div class="card-sub">ICE Energy Macro Anchor</div>
                 </div>
             </div>
@@ -392,37 +423,67 @@
                 <div class="card card-edible">
                     <div class="card-header-flex"><span class="card-label">CBOT Soybean Oil</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-cbot">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-cbot">--</span><span class="trend-pill" id="chg1w-cbot">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-cbot">--</span>
+                        <span class="trend-pill" id="chg1w-cbot">--</span>
+                        <span class="trend-pill" id="chg1m-cbot">--</span>
+                        <span class="trend-pill" id="chg1y-cbot">--</span>
+                    </div>
                     <div class="card-sub">Global Veg Oil Baseline</div>
                 </div>
                 <div class="card card-edible">
                     <div class="card-header-flex"><span class="card-label">Crude Palm Oil (FCPO)</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-palm">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-palm">--</span><span class="trend-pill" id="chg1w-palm">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-palm">--</span>
+                        <span class="trend-pill" id="chg1w-palm">--</span>
+                        <span class="trend-pill" id="chg1m-palm">--</span>
+                        <span class="trend-pill" id="chg1y-palm">--</span>
+                    </div>
                     <div class="card-sub">Bursa Malaysia Benchmark</div>
                 </div>
                 <div class="card card-edible">
                     <div class="card-header-flex"><span class="card-label">Canola / Rapeseed Oil</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-canola">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-canola">--</span><span class="trend-pill" id="chg1w-canola">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-canola">--</span>
+                        <span class="trend-pill" id="chg1w-canola">--</span>
+                        <span class="trend-pill" id="chg1m-canola">--</span>
+                        <span class="trend-pill" id="chg1y-canola">--</span>
+                    </div>
                     <div class="card-sub">MATIF / ICE Liquid Oil</div>
                 </div>
                 <div class="card card-edible">
                     <div class="card-header-flex"><span class="card-label">Indian Refined Soy Oil</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-indsoy">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-indsoy">--</span><span class="trend-pill" id="chg1w-indsoy">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-indsoy">--</span>
+                        <span class="trend-pill" id="chg1w-indsoy">--</span>
+                        <span class="trend-pill" id="chg1m-indsoy">--</span>
+                        <span class="trend-pill" id="chg1y-indsoy">--</span>
+                    </div>
                     <div class="card-sub">Landed Spot Benchmark</div>
                 </div>
                 <div class="card card-edible">
                     <div class="card-header-flex"><span class="card-label">Mustard / Kachi Ghani</span><span class="legend-tag tag-edible">Edible</span></div>
                     <div class="card-val" id="price-mustard">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-mustard">--</span><span class="trend-pill" id="chg1w-mustard">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-mustard">--</span>
+                        <span class="trend-pill" id="chg1w-mustard">--</span>
+                        <span class="trend-pill" id="chg1m-mustard">--</span>
+                        <span class="trend-pill" id="chg1y-mustard">--</span>
+                    </div>
                     <div class="card-sub">NCDEX Domestic Spot</div>
                 </div>
                 <div class="card card-nonedible">
                     <div class="card-header-flex"><span class="card-label">Refined Castor Oil</span><span class="legend-tag tag-nonedible">Industrial</span></div>
                     <div class="card-val" id="price-castor">--</div>
-                    <div class="trend-container"><span class="trend-pill" id="chg1d-castor">--</span><span class="trend-pill" id="chg1w-castor">--</span></div>
+                    <div class="trend-container">
+                        <span class="trend-pill" id="chg1d-castor">--</span>
+                        <span class="trend-pill" id="chg1w-castor">--</span>
+                        <span class="trend-pill" id="chg1m-castor">--</span>
+                        <span class="trend-pill" id="chg1y-castor">--</span>
+                    </div>
                     <div class="card-sub">NCDEX Industrial Non-Edible</div>
                 </div>
             </div>
@@ -448,18 +509,18 @@
         let fxRate = 83.85;
 
         let marketData = {
-            uco: { usd: 1025.00, chg1d: 1.10, chg1w: 2.45 },
-            tallow: { usd: 1080.00, chg1d: 0.65, chg1w: -0.90 },
-            dco: { usd: 1040.00, chg1d: 0.80, chg1w: 1.15 },
-            pome: { usd: 975.00, chg1d: -0.40, chg1w: 1.80 },
-            gasoil: { usd: 880.00, chg1d: -1.15, chg1w: 0.45 },
-            brent: { usd: 620.00, chg1d: -0.65, chg1w: -2.10 },
-            cbot: { usd: 1195.00, chg1d: 0.85, chg1w: -1.20 },
-            palm: { usd: 1100.00, chg1d: 1.25, chg1w: 2.30 },
-            canola: { usd: 1290.00, chg1d: 0.40, chg1w: 1.10 },
-            indsoy: { usd: 1320.00, chg1d: -0.30, chg1w: 0.15 },
-            mustard: { usd: 1450.00, chg1d: 0.50, chg1w: -0.80 },
-            castor: { usd: 1335.00, chg1d: 0.75, chg1w: 1.50 }
+            uco: { usd: 1025.00, chg1d: 1.10, chg1w: 2.45, chg1m: 4.15, chg1y: 8.30 },
+            tallow: { usd: 1080.00, chg1d: 0.65, chg1w: -0.90, chg1m: 2.10, chg1y: 5.40 },
+            dco: { usd: 1040.00, chg1d: 0.80, chg1w: 1.15, chg1m: 3.05, chg1y: 6.20 },
+            pome: { usd: 975.00, chg1d: -0.40, chg1w: 1.80, chg1m: 1.90, chg1y: 4.10 },
+            gasoil: { usd: 880.00, chg1d: -1.15, chg1w: 0.45, chg1m: -2.30, chg1y: -5.10 },
+            brent: { usd: 620.00, chg1d: -0.65, chg1w: -2.10, chg1m: -3.80, chg1y: -8.50 },
+            cbot: { usd: 1195.00, chg1d: 0.85, chg1w: -1.20, chg1m: 2.80, chg1y: 7.60 },
+            palm: { usd: 1100.00, chg1d: 1.25, chg1w: 2.30, chg1m: 5.10, chg1y: 11.20 },
+            canola: { usd: 1290.00, chg1d: 0.40, chg1w: 1.10, chg1m: 3.40, chg1y: 6.80 },
+            indsoy: { usd: 1320.00, chg1d: -0.30, chg1w: 0.15, chg1m: 1.80, chg1y: 5.10 },
+            mustard: { usd: 1450.00, chg1d: 0.50, chg1w: -0.80, chg1m: 2.20, chg1y: 4.90 },
+            castor: { usd: 1335.00, chg1d: 0.75, chg1w: 1.50, chg1m: 3.10, chg1y: 7.40 }
         };
 
         async function fetchAutoData() {
@@ -491,6 +552,8 @@
             const symbol = currentCurrency === 'INR' ? '₹' : '$';
             document.getElementById('fx-rate-display').innerText = `USD/INR: ₹${fxRate.toFixed(2)}`;
 
+            const periods = ['1d', '1w', '1m', '1y'];
+
             for (const [key, item] of Object.entries(marketData)) {
                 const finalVal = item.usd * mult;
                 const priceElem = document.getElementById(`price-${key}`);
@@ -498,19 +561,15 @@
                     priceElem.innerText = `${symbol}${finalVal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} /MT`;
                 }
 
-                const elem1d = document.getElementById(`chg1d-${key}`);
-                if (elem1d) {
-                    const isUp = item.chg1d >= 0;
-                    elem1d.className = `trend-pill ${isUp ? 'up' : 'down'}`;
-                    elem1d.innerText = `${isUp ? '▲' : '▼'} ${Math.abs(item.chg1d).toFixed(2)}% (1D)`;
-                }
-
-                const elem1w = document.getElementById(`chg1w-${key}`);
-                if (elem1w) {
-                    const isUp = item.chg1w >= 0;
-                    elem1w.className = `trend-pill ${isUp ? 'up' : 'down'}`;
-                    elem1w.innerText = `${isUp ? '▲' : '▼'} ${Math.abs(item.chg1w).toFixed(2)}% (1W)`;
-                }
+                periods.forEach(p => {
+                    const elem = document.getElementById(`chg${p}-${key}`);
+                    if (elem && item[`chg${p}`] !== undefined) {
+                        const val = item[`chg${p}`];
+                        const isUp = val >= 0;
+                        elem.className = `trend-pill ${isUp ? 'up' : 'down'}`;
+                        elem.innerText = `${isUp ? '▲' : '▼'} ${Math.abs(val).toFixed(2)}% (${p.toUpperCase()})`;
+                    }
+                });
             }
         }
 
