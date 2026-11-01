@@ -1,5 +1,5 @@
 {
-  "last_updated": "31 Oct 2026, 12:31 PM IST",
+  "last_updated": "01 Nov 2026, 01:06 PM IST",
   "fx_rate": 94.95,
   "prices": {
     "uco": {
@@ -7,56 +7,56 @@
       "chg1d": 0.4,
       "chg1w": -1.39,
       "chg1m": -1.6,
-      "chg1y": 35.37
+      "chg1y": 32.22
     },
     "tallow": {
       "usd": 1307.56,
       "chg1d": 0.4,
       "chg1w": -1.25,
       "chg1m": -1.76,
-      "chg1y": 33.6
+      "chg1y": 30.61
     },
     "dco": {
       "usd": 1263.98,
       "chg1d": 0.4,
       "chg1w": -1.46,
       "chg1m": -1.52,
-      "chg1y": 36.08
+      "chg1y": 32.86
     },
     "pome": {
       "usd": 1191.33,
       "chg1d": 0.4,
       "chg1w": -1.18,
       "chg1m": -1.68,
-      "chg1y": 31.83
+      "chg1y": 29.0
     },
     "gasoil": {
-      "usd": 1498.95,
-      "chg1d": 1.15,
-      "chg1w": -3.89,
-      "chg1m": 3.2,
-      "chg1y": 97.04
+      "usd": 1463.15,
+      "chg1d": -1.26,
+      "chg1w": -6.18,
+      "chg1m": 0.73,
+      "chg1y": 94.41
     },
     "brent": {
-      "usd": 862.3,
-      "chg1d": 2.4,
-      "chg1w": 0.79,
-      "chg1m": 14.98,
-      "chg1y": 80.79
+      "usd": 831.44,
+      "chg1d": -1.26,
+      "chg1w": -2.82,
+      "chg1m": 10.87,
+      "chg1y": 74.8
     },
     "cbot": {
       "usd": 1452.85,
       "chg1d": 0.4,
       "chg1w": -1.39,
       "chg1m": -1.6,
-      "chg1y": 35.37
+      "chg1y": 32.22
     },
     "palm": {
       "usd": 1336.62,
       "chg1d": 0.44,
       "chg1w": -1.6,
       "chg1m": -1.73,
-      "chg1y": 39.61
+      "chg1y": 36.09
     },
     "canola": {
       "usd": 1290.0,
@@ -70,21 +70,21 @@
       "chg1d": 0.4,
       "chg1w": -1.39,
       "chg1m": -1.6,
-      "chg1y": 35.37
+      "chg1y": 32.22
     },
     "mustard": {
       "usd": 1714.36,
       "chg1d": 0.38,
       "chg1w": -1.25,
       "chg1m": -1.63,
-      "chg1y": 34.66
+      "chg1y": 31.58
     },
     "castor": {
       "usd": 1598.13,
       "chg1d": 0.42,
       "chg1w": -1.5,
       "chg1m": -1.47,
-      "chg1y": 37.14
+      "chg1y": 33.83
     }
   }
 }
