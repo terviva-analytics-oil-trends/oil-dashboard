@@ -1,5 +1,5 @@
 {
-  "last_updated": "14 Nov 2026, 01:08 PM IST",
+  "last_updated": "15 Nov 2026, 01:24 PM IST",
   "fx_rate": 94.24,
   "prices": {
     "uco": {
@@ -7,56 +7,56 @@
       "chg1d": 0.55,
       "chg1w": 2.43,
       "chg1m": -5.03,
-      "chg1y": 27.16
+      "chg1y": 24.7
     },
     "tallow": {
       "usd": 1265.3,
       "chg1d": 0.55,
       "chg1w": 2.19,
       "chg1m": -5.53,
-      "chg1y": 25.8
+      "chg1y": 23.46
     },
     "dco": {
       "usd": 1223.12,
       "chg1d": 0.55,
       "chg1w": 2.55,
       "chg1m": -4.78,
-      "chg1y": 27.7
+      "chg1y": 25.19
     },
     "pome": {
       "usd": 1152.83,
       "chg1d": 0.55,
       "chg1w": 2.07,
       "chg1m": -5.28,
-      "chg1y": 24.44
+      "chg1y": 22.23
     },
     "gasoil": {
       "usd": 1332.48,
       "chg1d": -0.65,
       "chg1w": -1.69,
       "chg1m": -12.12,
-      "chg1y": 68.25
+      "chg1y": 67.2
     },
     "brent": {
       "usd": 702.51,
       "chg1d": 0.02,
       "chg1w": -2.52,
       "chg1m": -9.52,
-      "chg1y": 48.84
+      "chg1y": 49.28
     },
     "cbot": {
       "usd": 1405.89,
       "chg1d": 0.55,
       "chg1w": 2.43,
       "chg1m": -5.03,
-      "chg1y": 27.16
+      "chg1y": 24.7
     },
     "palm": {
       "usd": 1293.42,
       "chg1d": 0.61,
       "chg1w": 2.79,
       "chg1m": -5.43,
-      "chg1y": 30.42
+      "chg1y": 27.66
     },
     "canola": {
       "usd": 1290.0,
@@ -70,21 +70,21 @@
       "chg1d": 0.55,
       "chg1w": 2.43,
       "chg1m": -5.03,
-      "chg1y": 27.16
+      "chg1y": 24.7
     },
     "mustard": {
       "usd": 1658.95,
       "chg1d": 0.52,
       "chg1w": 2.19,
       "chg1m": -5.13,
-      "chg1y": 26.62
+      "chg1y": 24.21
     },
     "castor": {
       "usd": 1546.48,
       "chg1d": 0.58,
       "chg1w": 2.62,
       "chg1m": -4.63,
-      "chg1y": 28.52
+      "chg1y": 25.93
     }
   }
 }
